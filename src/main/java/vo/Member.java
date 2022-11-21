@@ -4,7 +4,7 @@ public class Member {
 	private int memberNo;
 	private String memberId;
 	private String memberPw;
-	private String ememberName;
+	private String memberName;
 	private String updatedate;
 	private String createdate;
 	
@@ -26,11 +26,11 @@ public class Member {
 	public void setMemberPw(String memberPw) {
 		this.memberPw = memberPw;
 	}
-	public String getEmemberName() {
-		return ememberName;
+	public String getMemberName() {
+		return memberName;
 	}
-	public void setEmemberName(String ememberName) {
-		this.ememberName = ememberName;
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
 	public String getUpdatedate() {
 		return updatedate;
