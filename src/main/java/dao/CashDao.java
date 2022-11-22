@@ -19,6 +19,7 @@ public class CashDao {
 				+ "		c.cash_no cashNo"
 				+ "		, c.cash_date cashDate"
 				+ "		, c.cash_price cashPrice"
+				+ "		, c.category_no categoryNo"
 				+ "		, c.cash_memo cashMemo"
 				+ "		, ct.category_kind categoryKind"
 				+ "		, ct.category_name categoryName"
@@ -40,7 +41,8 @@ public class CashDao {
 			m.put("cashNo", rs.getInt("cashNo"));
 			m.put("cashDate", rs.getString("cashDate"));
 			m.put("cashPrice", rs.getLong("cashPrice"));
-			m.put("cashMemo", rs.getLong("cashMemo"));
+			m.put("cashMemo", rs.getString("cashMemo"));
+			m.put("categoryNo", rs.getLong("categoryNo"));
 			m.put("categoryKind", rs.getString("categoryKind"));
 			m.put("categoryName", rs.getString("categoryName"));
 			list.add(m);

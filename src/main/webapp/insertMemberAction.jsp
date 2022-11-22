@@ -14,18 +14,9 @@
 	
 	// 분리된 모델 호출
 	MemberDao memberDao = new MemberDao();
-	Member resultRow = memberDao.insertMember(paramMember);
-	
+	Member resultRow = memberDao.insertMember(paramMember);	
 
-	int row = stmt.executeUpdate();
-	if(row ==1) {
-		System.out.println("입력성공");
-		response.sendRedirect(request.getContextPath()+"/loginForm.jsp");
-	} else {
-		System.out.println("입력실패");
-		response.sendRedirect(request.getContextPath()+"/insertMemberForm.jsp");
-	}
-	
+	response.sendRedirect(request.getContextPath()+"/loginForm.jsp");
 %>
 <!DOCTYPE html>
 <html>

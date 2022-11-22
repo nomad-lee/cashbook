@@ -73,7 +73,7 @@
 <body>
 	<div>
 		<!-- 로그인 정보(세션 loginMember 변수) 출력 -->
-		<%=(String)(session.getAttribute("loginMemberId"))%>님 반갑습니다.
+		<%=loginMember.getMemberName()%>님 반갑습니다.
 	</div>	
 	<div>
 		<a href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month-1%>">[이전달]</a>

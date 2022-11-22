@@ -40,7 +40,7 @@ public class MemberDao {
 	
 	// 회원가입
 	public Member insertMember(Member paramMember) throws Exception {
-		Member resultRow = null;
+		Member resultRow = new Member();
 		/*
 		Class.forName("org.mariadb.jdbc.Driver");
 		Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/employees","root","java1234");
@@ -48,11 +48,18 @@ public class MemberDao {
 		
 		DBUtil dbUtil = new DBUtil();
 		Connection conn = dbUtil.getConnection();
-		String sql = "INSERT INTO member(member_id, member_pw, member_name) VALUES(?, PASSWORD(?), ?)";
+		String sql = "INSERT INTO member(member_id, member_pw, member_name, updatedate, createdate) VALUES(?, PASSWORD(?), ?, CURDATE(), CURDATE())";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, paramMember.getMemberId());
 		stmt.setString(2, paramMember.getMemberPw());
 		stmt.setString(3, paramMember.getMemberName());
+		
+		int row = stmt.executeUpdate();
+		if(row ==1) {
+			System.out.println("입력성공");
+		} else {
+			System.out.println("입력실패");
+		}
 				
 		stmt.close();
 		conn.close();

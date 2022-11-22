@@ -9,8 +9,7 @@
 	int year = 0;
 	int month = 0;
 	int date = 0;
-	
-	/* 
+
 	if ((request.getParameter("year") == null) || (request.getParameter("month") == null) || (request.getParameter("date") == null)) {
 		Calendar today = Calendar.getInstance();
 		year = today.get(Calendar.YEAR);
@@ -21,11 +20,9 @@
 		month = Integer.parseInt(request.getParameter("month"));
 		date = Integer.parseInt(request.getParameter("date"));
 		System.out.println(year+"-"+month+"-"+date);
-	} */
+	}
 	
-	//M
-	
-	
+	//M	
 	CategoryDao categoryDao = new CategoryDao();
 	ArrayList<Category> categoryList = categoryDao.selectCategoryList();
 	
@@ -44,28 +41,32 @@
 </head>
 <body>
 	<!-- cash 입력 폼 -->
-	<form action="<%=request.getContextPath()%>/cash/insertCashAction.jsp" method="post">
+	<form action="<%=request.getContextPath()%>/cash/insertCashAction.jsp" method="post" class="form">
 		<input type="hidden" name="memberId" value="<%= loginMember.getMemberId() %>">
-		<table border="1">
+		<table border="1" class="table">
 			<tr>
 				<td>categoryNo</td>
 				<td>
 					<select name = "categoryNo">
-						<%	
-							for(Category c : categoryList) {
-						%>
-								<option value="<%=c.getCategoryNo()%>">
-									<%=c.getCategoryKind()%> <%=c.getCategoryName() %>
-								</option>
-						<%
-							}
-						%>
+					<%	
+						for(Category c : categoryList) {
+					%>
+							<option value="<%=c.getCategoryNo()%>">
+								[<%=c.getCategoryKind()%>] <%=c.getCategoryName() %>
+							</option>
+					<%
+						}
+					%>
 					</select>
 				</td>			
 			</tr>
 			<tr>
+				<td>cashPrice</td>
+				<td><input type="number" name="cashPrice"></td>
+			</tr>
+			<tr>
 				<td>cashDate</td>
-				<input type="text" name="cashDate" value="<%=year%>-<%=month%>-<%=date%>" readonly="readonly">
+				<td><input type="text" name="cashDate" value="<%=year%>-<%=month%>-<%=date%>" readonly="readonly"></td>
 			</tr>
 			<tr>
 				<td>cashMemo</td>
@@ -74,7 +75,7 @@
 				</td>
 			</tr>
 		</table>
-		<button type="submit"></button>
+		<button type="submit">입력</button>
 	</form>	
 	<!-- cash 목록 출력 -->
 	<table border="1" class="table">
@@ -82,7 +83,6 @@
 			<th>수입/지출</th>
 			<th>항목</th>
 			<th>금액</th>
-			<th>결제일</th>
 			<th>메모</th>
 			<th>수정</th> <!-- /cash/updateCashForm.jsp?cashNo= -->
 			<th>삭제</th> <!-- /cash/deleteCash.jsp?cashNo= -->
@@ -97,7 +97,6 @@
 					<td><%=(String)(m.get("categoryKind"))%></td>
 					<td><%=(String)(m.get("categoryName"))%></td>
 					<td><%=(Long)(m.get("cashPrice"))%>원</td>
-					<td><%=(String)(m.get("cashDate"))%></td>
 					<td><%=(String)(m.get("cashMemo"))%></td>
 					<td><a class="btn btn-green" href="<%=request.getContextPath()%>/cash/deleteCashDate.jsp">✏️</a></td>
 					<td><a class="btn btn-danger" href="<%=request.getContextPath()%>/cash/deleteCashDate.jsp">X</a></td>
