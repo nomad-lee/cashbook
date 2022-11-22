@@ -4,11 +4,13 @@ public class Cash {
 	private int cashNo;
 	//private Categoty category; // INNER JOIN -> Cash타입
 	private int categoryNo; //FK -> INNER JOIN -> Map타입 사용
+	private String memberId;
 	private String cashDate;
 	private long cashPrice;
 	private String cashMemo;
 	private String updatedate;
 	private String createdate;
+	
 	public int getCashNo() {
 		return cashNo;
 	}
@@ -20,6 +22,12 @@ public class Cash {
 	}
 	public void setCategoryNo(int categoryNo) {
 		this.categoryNo = categoryNo;
+	}
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 	public String getCashDate() {
 		return cashDate;
@@ -50,5 +58,5 @@ public class Cash {
 	}
 	public void setCreatedate(String createdate) {
 		this.createdate = createdate;
-	}	
+	}
 }

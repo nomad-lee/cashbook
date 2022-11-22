@@ -12,7 +12,7 @@
 <body>
 	<h1 class="text-center mt-3">로그인</h1>	
 	<div class="container">
-		<form action="<%=request.getContextPath()%>/loginAction.jsp" method="post">
+		<form action="<%=request.getContextPath()%>/insertMemberAction.jsp" method="post">
 			<table class = "table">
 				<tr>
 					<td>아이디</td>
@@ -22,9 +22,12 @@
 					<td>패스워드</td>
 					<td><input type="password" class="form-control" name="memberPw"></td>
 				</tr>
+				<tr>
+					<td>이름</td>
+					<td><input type="text" class="form-control" name="memberName"></td>
+				</tr>
 			</table>
-			<a type="btn" class="btn btn-danger" href="">회원가입</a>
-			<button type="submit" class="btn btn-secondary">로그인</button>
+			<button type="submit" class="btn btn-secondary">가입완료</button>
 		</form>
 	</div>
 </body>

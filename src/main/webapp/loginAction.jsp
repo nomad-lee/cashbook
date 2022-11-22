@@ -3,6 +3,16 @@
 <%@ page import = "dao.*" %>
 <%@ page import = "java.sql.*" %>
 <%
+	request.setCharacterEncoding("utf-8");
+
+	if(request.getParameter("memberId") == null
+	|| request.getParameter("memberPw") == null 
+	|| request.getParameter("memberId") == "" 
+	|| request.getParameter("memberPw") == "") {
+	response.sendRedirect(request.getContextPath()+"/loginForm.jsp");
+	return;
+	}
+	
 	//1 컨트롤러	
 	String memberId = request.getParameter("memberId");
 	String memberPw = request.getParameter("memberPw");
@@ -15,12 +25,13 @@
 	// 분리된 모델 호출
 	MemberDao memberDao = new MemberDao();
 	Member resultMember = memberDao.login(paramMember);
+	System.out.println(resultMember+"넘긴 값");
 	
 	String redirectUrl = "/loginForm.jsp";
 	
 	if(resultMember != null) {
-		session.setAttribute("loginMember", resultMember); //session안에 로그인 아이디 & 이름을 저장
 		redirectUrl = "/cash/cashList.jsp";
+		session.setAttribute("loginMember", resultMember); //session안에 로그인 아이디 & 이름을 저장
 	}
 	
 	// redirect

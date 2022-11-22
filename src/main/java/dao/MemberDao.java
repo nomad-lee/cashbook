@@ -6,7 +6,7 @@ import vo.Member;
 
 public class MemberDao {
 	public Member login(Member paramMember) throws Exception {
-		Member resultMember = null;
+		Member resultMember = new Member();
 		
 		/*
 		Class.forName("org.mariadb.jdbc.Driver");
@@ -19,7 +19,7 @@ public class MemberDao {
 		
 		DBUtil dbUtil = new DBUtil();
 		Connection conn = dbUtil.getConnection();
-		String sql = "SELECT member_id memberId, member_name memberName FROM member WHERE member_id=? AND member_pw=?";
+		String sql = "SELECT member_id memberId, member_name memberName FROM member WHERE member_id = ? AND member_pw = PASSWORD(?)";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, paramMember.getMemberId());
 		stmt.setString(2, paramMember.getMemberPw());
@@ -29,7 +29,8 @@ public class MemberDao {
 			resultMember.setMemberId(rs.getString("memberId"));
 			resultMember.setMemberName(rs.getString("memberName"));
 		}
-				
+
+		System.out.println(paramMember.getMemberId()+""+paramMember.getMemberPw()+"값 넘어옴");
 		rs.close();
 		stmt.close();
 		conn.close();
@@ -38,12 +39,23 @@ public class MemberDao {
 	}
 	
 	// 회원가입
-	public int insertMember(Member parmMember) throws Exception {
-		int resultRow = 0;
+	public Member insertMember(Member paramMember) throws Exception {
+		Member resultRow = null;
 		/*
 		Class.forName("org.mariadb.jdbc.Driver");
 		Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/employees","root","java1234");
 		*/
+		
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		String sql = "INSERT INTO member(member_id, member_pw, member_name) VALUES(?, PASSWORD(?), ?)";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, paramMember.getMemberId());
+		stmt.setString(2, paramMember.getMemberPw());
+		stmt.setString(3, paramMember.getMemberName());
+				
+		stmt.close();
+		conn.close();
 		return resultRow;
 	}
 }

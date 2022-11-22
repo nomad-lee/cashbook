@@ -3,10 +3,11 @@
 <%@ page import="vo.*" %>
 <%@ page import = "java.util.*" %> <!-- Calendar Arraylist -->
 <%
-	Object objLoginMember = session.getAttribute("loginMember");
-	Member loginMember = (Member) objLoginMember;
-	
 	// Controller : session, request
+	
+	// session에 저장된 멤버(현재 로그인 된 사용자)
+	Member loginMember = (Member)session.getAttribute("loginMember");
+	
 	// request 년 + 월
 	int year = 0;
 	int month = 0;
@@ -53,7 +54,7 @@
 	
 	// Model 호출 : 일별 cash 목록
 	CashDao cashDao = new CashDao();
-	ArrayList<HashMap<String, Object>> list = cashDao.selectCashListByMonth(year,month+1);
+	ArrayList<HashMap<String, Object>> list = cashDao.selectCashListByMonth(loginMember.getMemberId(), year, month+1);
 	
 	// View : 달력출력 + 일별 cash 목록 출력
 	
@@ -72,14 +73,16 @@
 <body>
 	<div>
 		<!-- 로그인 정보(세션 loginMember 변수) 출력 -->
-	</div>
-	
+		<%=(String)(session.getAttribute("loginMember"))%>님 반갑습니다.
+	</div>	
 	<div>
+		<a href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month-1%>">[이전달]</a>
 		<%=year%><%=month+1%> 월
+		<a href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month+1%>">>[다음달]</a>
 	</div>
 	<div>
 		<!-- 달력 -->
-		<table>
+		<table class="table">
 			<tr>
 				<th>일</th>
 				<th>월</th>
@@ -98,7 +101,27 @@
 							int date = i-beginBlank;
 							if(date > 0 && date <= lastDate) {
 				%>
-								<%=date%>
+								<div>
+									<a href="<%=request.getContextPath()%>/cash/cashDateList.jsp?year=<%=year%>&month=<%=month+1%>&date=<%=date%>">
+									<%=date%>
+									</a>
+								</div>
+								<div>
+									<%
+										for(HashMap<String, Object> m : list) {
+											String cashDate = (String)(m.get("cashDate"));
+											if(Integer.parseInt(cashDate.substring(8)) == date) {	
+									%>
+												[<%=(String)(m.get("categoryKind"))%>]
+												<%=(String)(m.get("categoryName"))%>
+												&nbsp;
+												<%=(Long)(m.get("cashPrice"))%>원
+												<br>
+									<%
+											}							
+										}									
+									%>	
+								</div>
 				<%				
 							}
 				%>
@@ -113,33 +136,6 @@
 					}
 				%>
 			</tr>
-		</table>
-	</div>
-	<div>
-		<table class = "table">
-			<tr>
-				<th>cashNo</th>
-				<th>cashDate</th>
-				<th>cashPrice</th>
-				<th>categoryNo</th>
-				<th>categoryKind</th>
-				<th>categoryName</th>
-			</tr>
-		<%
-			for(HashMap<String, Object> m : list) {
-		%>
-				<!-- 과제 -->
-				<tr>
-					<td><%=(Integer)(m.get("cashNo"))%></td>
-					<td><%=(String)(m.get("cashDate"))%></td>
-					<td><%=(Long)(m.get("cashPrice"))%></td>
-					<td><%=(Integer)(m.get("categoryNo"))%></td>
-					<td><%=(String)(m.get("categoryKind"))%></td>
-					<td><%=(String)(m.get("categoryName"))%></td>
-				</tr>
-		<%
-			}
-		%>	
 		</table>
 	</div>
 </body>
