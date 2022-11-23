@@ -3,14 +3,11 @@
 <%@ page import = "dao.*" %>
 <%
 	request.setCharacterEncoding("utf-8");
-	String memberId = request.getParameter("memberId");
-	String memberPw = request.getParameter("memberPw");
-	String memberName = request.getParameter("memberName");
 
 	Member paramMember = new Member();
-	paramMember.setMemberId(memberId);
-	paramMember.setMemberPw(memberPw);
-	paramMember.setMemberName(memberName);
+	paramMember.setMemberId(request.getParameter("memberId"));
+	paramMember.setMemberPw(request.getParameter("memberPw"));
+	paramMember.setMemberName(request.getParameter("memberName"));
 	
 	// 분리된 모델 호출
 	MemberDao memberDao = new MemberDao();

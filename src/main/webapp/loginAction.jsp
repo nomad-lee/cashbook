@@ -25,7 +25,6 @@
 	// 분리된 모델 호출
 	MemberDao memberDao = new MemberDao();
 	Member resultMember = memberDao.login(paramMember);
-	System.out.println(resultMember+"넘긴 값");
 	
 	String redirectUrl = "/loginForm.jsp";
 	

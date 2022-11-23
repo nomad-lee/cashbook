@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import util.DBUtil;
+import vo.Cash;
+import vo.Member;
 
 public class CashDao {
 	
@@ -90,5 +92,59 @@ public class CashDao {
 		stmt.close();
 		conn.close();
 		return list;
+	}
+	// insertCashAction.jsp
+	public Cash insertCash(Cash paramCash) throws Exception {
+		Cash resultRow = new Cash();
+		/*
+		Class.forName("org.mariadb.jdbc.Driver");
+		Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/employees","root","java1234");
+		*/
+		
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		String sql = "INSERT INTO cash(member_id, category_no, cash_price, cash_date, cash_memo, updatedate, createdate) VALUES(?, ?, ?, ?, ?, CURDATE(), CURDATE())";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, paramCash.getMemberId());
+		stmt.setInt(2, paramCash.getCategoryNo());
+		stmt.setLong(3, paramCash.getCashPrice());
+		stmt.setString(4, paramCash.getCashDate());
+		stmt.setString(5, paramCash.getCashMemo());
+		
+		int row = stmt.executeUpdate();
+		if(row ==1) {
+			System.out.println("입력성공");
+		} else {
+			System.out.println("입력실패");
+		}
+				
+		stmt.close();
+		conn.close();
+		return resultRow;
+	}
+	// deleteCashAction.jsp
+	public Cash deleteCash(Cash paramCash) throws Exception {
+		Cash resultRow = new Cash();
+		/*
+		Class.forName("org.mariadb.jdbc.Driver");
+		Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/employees","root","java1234");
+		*/
+		
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		String sql = "DELETE FROM cash WHERE cash_no = ?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, paramCash.getCashNo());
+		
+		int row = stmt.executeUpdate();
+		if(row ==1) {
+			System.out.println("삭제성공");
+		} else {
+			System.out.println("삭제실패");
+		}
+
+		stmt.close();
+		conn.close();
+		return resultRow;
 	}
 }

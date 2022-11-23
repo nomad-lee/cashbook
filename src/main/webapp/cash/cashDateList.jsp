@@ -15,11 +15,12 @@
 		year = today.get(Calendar.YEAR);
 		month = today.get(Calendar.MONTH);
 		date = today.get(Calendar.DATE);
+		System.out.println(year+"-"+month+"-"+date+"날짜없음");
 	} else {
 		year = Integer.parseInt(request.getParameter("year"));
 		month = Integer.parseInt(request.getParameter("month"));
 		date = Integer.parseInt(request.getParameter("date"));
-		System.out.println(year+"-"+month+"-"+date);
+		System.out.println(year+"-"+month+"-"+date+"날짜있음");
 	}
 	
 	//M	
@@ -42,7 +43,10 @@
 <body>
 	<!-- cash 입력 폼 -->
 	<form action="<%=request.getContextPath()%>/cash/insertCashAction.jsp" method="post" class="form">
-		<input type="hidden" name="memberId" value="<%= loginMember.getMemberId() %>">
+		<input type="hidden" name="memberId" value="<%= loginMember.getMemberId()%>">
+		<input type="hidden" name="year" value="<%=year%>"> 
+		<input type="hidden" name="month" value="<%=month%>"> 
+		<input type="hidden" name="date" value="<%=date%>"> 
 		<table border="1" class="table">
 			<tr>
 				<td>categoryNo</td>
@@ -78,7 +82,7 @@
 		<button type="submit">입력</button>
 	</form>	
 	<!-- cash 목록 출력 -->
-	<table border="1" class="table">
+	<table border="1" class="table">		
 		<tr>
 			<th>수입/지출</th>
 			<th>항목</th>
@@ -86,24 +90,26 @@
 			<th>메모</th>
 			<th>수정</th> <!-- /cash/updateCashForm.jsp?cashNo= -->
 			<th>삭제</th> <!-- /cash/deleteCash.jsp?cashNo= -->
-		</tr>
+		</tr>			
 			<%
 				for(HashMap<String, Object> m : list) {
 					String cashDate = (String)(m.get("cashDate"));
-					System.out.println(cashDate+"cashDate");
 					if(Integer.parseInt(cashDate.substring(8)) == date) {
+						System.out.println(cashDate+"cashDate");
+						int cashNo = (Integer)m.get("cashNo");
 			%>
-				<tr>
+				<tr>					
 					<td><%=(String)(m.get("categoryKind"))%></td>
 					<td><%=(String)(m.get("categoryName"))%></td>
 					<td><%=(Long)(m.get("cashPrice"))%>원</td>
 					<td><%=(String)(m.get("cashMemo"))%></td>
-					<td><a class="btn btn-green" href="<%=request.getContextPath()%>/cash/deleteCashDate.jsp">✏️</a></td>
-					<td><a class="btn btn-danger" href="<%=request.getContextPath()%>/cash/deleteCashDate.jsp">X</a></td>
+					<td><a class="btn btn-green" href="<%=request.getContextPath()%>/cash/updateCashForm.jsp?cashNo=<%=cashNo%>&year=<%=year%>&month=<%=month%>&date=<%=date%>">✏️</a></td>
+					<td><a class="btn btn-danger" href="<%=request.getContextPath()%>/cash/deleteCashAction.jsp?cashNo=<%=cashNo%>&year=<%=year%>&month=<%=month%>&date=<%=date%>%>">X</a></td>
 				</tr>
 			<%
 					}
 				}
+				
 			%>
 	</table>
 </body>

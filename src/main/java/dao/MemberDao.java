@@ -30,7 +30,7 @@ public class MemberDao {
 			resultMember.setMemberName(rs.getString("memberName"));
 		}
 
-		System.out.println(paramMember.getMemberId()+""+paramMember.getMemberPw()+"값 넘어옴");
+		System.out.println(paramMember.getMemberId()+""+paramMember.getMemberPw()+"login값 넘어옴");
 		rs.close();
 		stmt.close();
 		conn.close();
@@ -65,4 +65,35 @@ public class MemberDao {
 		conn.close();
 		return resultRow;
 	}
+	// 회원정보 수정
+	public Member updateMember(Member paramMember) throws Exception {
+		Member loginMember = new Member();
+		/*
+		Class.forName("org.mariadb.jdbc.Driver");
+		Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/employees","root","java1234");
+		*/
+		
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		String sql = "UPDATE member SET member_name = ?, updatedate = CURDATE() WHERE member_id = ?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setString(1, paramMember.getMemberName());
+		stmt.setString(2, paramMember.getMemberId());
+		
+		int row = stmt.executeUpdate();
+		if(row ==1) {
+			loginMember = login(paramMember);
+			System.out.println("수정성공");
+
+			stmt.close();
+			conn.close();
+			return loginMember;
+		} else {
+			System.out.println("수정실패");			
+
+			stmt.close();
+			conn.close();
+			return null;
+		}
+	}	
 }
