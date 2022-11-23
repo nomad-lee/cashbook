@@ -82,18 +82,17 @@ public class MemberDao {
 		
 		int row = stmt.executeUpdate();
 		if(row ==1) {
-			loginMember = login(paramMember);
 			System.out.println("수정성공");
-
+			
 			stmt.close();
 			conn.close();
 			return loginMember;
 		} else {
-			System.out.println("수정실패");			
-
+			System.out.println("수정실패");	
+			
 			stmt.close();
 			conn.close();
 			return null;
 		}
-	}	
+	}
 }

@@ -16,7 +16,7 @@
 	Member loginMember = memberDao.updateMember(updateMember);
 		
 	if(loginMember != null){
-		session.setAttribute("loginMember", loginMember);	
+		//session.setAttribute("loginMember", loginMember); null 버그 주범
 		response.sendRedirect(request.getContextPath()+"/cash/cashList.jsp"); //?year="+year+"&month="+month+"&date="+date
 		System.out.println(loginMember+"수정완");
 		

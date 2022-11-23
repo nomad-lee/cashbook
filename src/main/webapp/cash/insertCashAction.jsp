@@ -31,13 +31,3 @@
 
 	response.sendRedirect(request.getContextPath()+"/cash/cashDateList.jsp?"+"year="+year+"&month="+month+"&date="+date);
 %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
-</html>

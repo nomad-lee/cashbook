@@ -55,6 +55,28 @@ public class CashDao {
 		conn.close();
 		return list;
 	}
+	// updateCash
+	public HashMap<String, Object> selectCashListByCashNo(int cashNo) throws Exception{
+		HashMap<String, Object> map = new HashMap<>();
+		
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		String sql = "SELECT cash_no cashNo, cash_date cashDate, cash_price cashPrice, category_no categoryNo, cash_memo cashMemo \r\n"
+				+ "FROM cash\r\n"
+				+ "WHERE cash_no = ?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, cashNo);
+		
+		ResultSet rs = stmt.executeQuery();
+		if(rs.next()) {
+			map.put("cashNo", cashNo);
+			map.put("cashDate", rs.getString("cashDate"));
+			map.put("cashPrice", rs.getLong("cashPrice"));
+			map.put("categoryNo", rs.getInt("categoryNo"));
+			map.put("cashMemo", rs.getString("cashMemo"));
+		}
+		return map;
+	}
 	
 	// 호출 : cashList.jsp
 	public ArrayList<HashMap<String, Object>> selectCashListByMonth(String memberId, int year, int month) throws Exception {

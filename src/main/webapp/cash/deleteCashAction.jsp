@@ -8,6 +8,7 @@
 	Cash paramCash = new Cash();
 	paramCash.setCashNo(Integer.parseInt(request.getParameter("cashNo")));
 	paramCash.setMemberId(request.getParameter("memberId"));
+	System.out.println(request.getParameter("year")+"-"+request.getParameter("month")+"-"+request.getParameter("date"));
 
 	int year = 0;
 	int month = 0;
@@ -27,5 +28,4 @@
 	Cash resultRow = cashDao.deleteCash(paramCash);	
 
 	response.sendRedirect(request.getContextPath()+"/cash/cashDateList.jsp?"+"year="+year+"&month="+month+"&date="+date);
-
 %>
