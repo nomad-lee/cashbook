@@ -10,6 +10,7 @@
 	int month = 0;
 	int date = 0;
 	int cashNo = Integer.parseInt(request.getParameter("cashNo"));
+	System.out.println(cashNo+" updateCashForm");
 
 	if ((request.getParameter("year") == null) || (request.getParameter("month") == null) || (request.getParameter("date") == null)) {
 		Calendar today = Calendar.getInstance();
@@ -41,8 +42,9 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-	<form action="<%=request.getContextPath()%>/cash/insertCashAction.jsp" method="post" class="form">
-		<input type="hidden" name="memberId" value="<%= loginMember.getMemberId()%>">
+	<form action="<%=request.getContextPath()%>/cash/updateCashAction.jsp" method="post" class="form">
+		<input type="hidden" name="memberId" value="<%=loginMember.getMemberId()%>">
+		<input type="hidden" name="cashNo" value="<%=cashNo%>">
 		<input type="hidden" name="year" value="<%=year%>"> 
 		<input type="hidden" name="month" value="<%=month%>"> 
 		<input type="hidden" name="date" value="<%=date%>"> 

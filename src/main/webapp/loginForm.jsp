@@ -23,7 +23,7 @@
 					<td><input type="password" class="form-control" name="memberPw"></td>
 				</tr>
 			</table>
-			<a type="btn" class="btn btn-danger" href="<%=request.getContextPath()%>/insertMemberForm.jsp">회원가입</a>
+			<a type="btn" class="btn btn-dark" href="<%=request.getContextPath()%>/insertMemberForm.jsp">회원가입</a>
 			<button type="submit" class="btn btn-secondary">로그인</button>
 		</form>
 	</div>

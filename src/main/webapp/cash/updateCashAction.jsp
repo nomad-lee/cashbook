@@ -14,17 +14,20 @@
 	updateCash.setCashNo(Integer.parseInt(request.getParameter("cashNo")));
 	System.out.println(request.getParameter("cashNo")+"수정cash action");
 	
+	String year = request.getParameter("year");
+	String month = request.getParameter("month");
+	String date = request.getParameter("date");
+	
 	// 분리된 모델 호출
 	CashDao cashDao = new CashDao();	
 	Cash resultCash = cashDao.updateCash(updateCash);
 		
 	if(resultCash != null){
-		//session.setAttribute("loginMember", loginMember); null 버그 주범
-		response.sendRedirect(request.getContextPath()+"/cash/cashDateList.jsp"); //?year="+year+"&month="+month+"&date="+date
+		response.sendRedirect(request.getContextPath()+"/cash/cashDateList.jsp?year="+year+"&month="+month+"&date="+date);
 		System.out.println(resultCash+"수정완");
 		
 	} else {
 		response.sendRedirect(request.getContextPath()+"/cash/updateCashForm.jsp");
 		System.out.println("수정실패");
-	}	
+	}
 %>

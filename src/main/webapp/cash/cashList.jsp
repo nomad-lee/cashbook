@@ -74,7 +74,7 @@
 	<div>		
 		<!-- 로그인 정보(세션 loginMember 변수) 출력 -->
 		<%=loginMember.getMemberName()%>님 반갑습니다.		
-		<a type="btn" class="btn btn-danger" href="<%=request.getContextPath()%>/updateMemberForm.jsp">내정보</a>
+		<a type="btn" class="btn btn-info" href="<%=request.getContextPath()%>/updateMemberForm.jsp">내정보</a>
 		<a type="btn" class="btn btn-danger" href="<%=request.getContextPath()%>/logout.jsp">로그아웃</a>
 	</div>
 	<div>

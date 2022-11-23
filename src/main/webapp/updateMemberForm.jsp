@@ -19,8 +19,8 @@
 			<table class = "table">
 				<tr>
 					<td>아이디</td>
-					<td><input type="text" class="form-control" name="memberId" value="<%=loginMember.getMemberId()%>" readonly></td>
-				</tr>
+					<td><input type="text" class="form-control" name="memberId" value="<%=loginMember.getMemberId()%>" readonly></td> <!-- 객체에 여러 값을 넣고 분리해서 호출가능 -->
+				</tr> 
 				<tr>
 					<td>이름</td>
 					<td><input type="text" class="form-control" name="memberName" value="<%=loginMember.getMemberName()%>"></td>
@@ -29,6 +29,5 @@
 			<button type="submit" class="btn btn-dark">수정완료</button>
 		</form>
 	</div>
-
 </body>
 </html>

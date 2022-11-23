@@ -103,7 +103,7 @@
 					<td><%=(String)(m.get("categoryName"))%></td>
 					<td><%=(Long)(m.get("cashPrice"))%>원</td>
 					<td><%=(String)(m.get("cashMemo"))%></td>
-					<td><a class="btn btn-green" href="<%=request.getContextPath()%>/cash/updateCashForm.jsp?cashNo=<%=cashNo%>&year=<%=year%>&month=<%=month%>&date=<%=date%>">✏️</a></td>
+					<td><a class="btn" href="<%=request.getContextPath()%>/cash/updateCashForm.jsp?cashNo=<%=cashNo%>&year=<%=year%>&month=<%=month%>&date=<%=date%>">✏️</a></td>
 					<td><a class="btn btn-danger" href="<%=request.getContextPath()%>/cash/deleteCashAction.jsp?cashNo=<%=cashNo%>&year=<%=year%>&month=<%=month%>&date=<%=date%>">X</a></td>
 				</tr>
 			<%

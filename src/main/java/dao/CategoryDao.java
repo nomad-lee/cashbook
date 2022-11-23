@@ -9,24 +9,22 @@ import util.DBUtil;
 import vo.Category;
 
 public class CategoryDao {
+	// cashDateList 카테고리 값
 	public ArrayList<Category> selectCategoryList() throws Exception {
 		ArrayList<Category> categoryList = new ArrayList<Category>();
 		DBUtil dbUtil = new DBUtil();
 		Connection conn = dbUtil.getConnection();
-		String sql = "SELECT category_no categoryNo, category_kind categoryKind, category_name categoryName from category";
+		String sql = "SELECT category_no categoryNo, category_kind categoryKind, category_name categoryName from category ORDER BY category_kind ASC";
 		PreparedStatement stmt = conn.prepareStatement(sql);
-		ResultSet rs = stmt.executeQuery();
 		
+		ResultSet rs = stmt.executeQuery();		
 		while(rs.next()) {
 			Category category = new Category();
 			category.setCategoryNo(rs.getInt("categoryNo"));
 			category.setCategoryKind(rs.getString("categoryKind"));
-			category.setCategoryName(rs.getString("categoryName"));
-			
+			category.setCategoryName(rs.getString("categoryName"));			
 			categoryList.add(category);
 		}
-		
-		// ORDER BY category_kind
 		return categoryList;
 	}
 }
