@@ -76,11 +76,11 @@
 		<%=loginMember.getMemberName()%>님 반갑습니다.		
 		<a type="btn" class="btn btn-danger" href="<%=request.getContextPath()%>/updateMemberForm.jsp">내정보</a>
 		<a type="btn" class="btn btn-danger" href="<%=request.getContextPath()%>/logout.jsp">로그아웃</a>
-	</div>	
+	</div>
 	<div>
 		<a href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month-1%>">[이전달]</a>
 		<%=year%><%=month+1%> 월
-		<a href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month+1%>">>[다음달]</a>
+		<a href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month+1%>">[다음달]</a>
 	</div>
 	<div>
 		<!-- 달력 -->

@@ -144,6 +144,39 @@ public class CashDao {
 		conn.close();
 		return resultRow;
 	}
+	// updateCashAction.jsp
+	public Cash updateCash(Cash paramMember) throws Exception {
+		Cash resultCash = new Cash();
+		/*
+		Class.forName("org.mariadb.jdbc.Driver");
+		Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/employees","root","java1234");
+		*/
+		
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		String sql = "UPDATE cash SET category_no = ?, cash_price = ?, cash_date = ?, cash_memo = ? WHERE cash_no = ?";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, paramMember.getCategoryNo());
+		stmt.setLong(2, paramMember.getCashPrice());
+		stmt.setString(3, paramMember.getCashDate());
+		stmt.setString(4, paramMember.getCashMemo());
+		stmt.setInt(5, paramMember.getCashNo());
+		
+		int row = stmt.executeUpdate();
+		if(row ==1) {
+			System.out.println("수정성공");
+			
+			stmt.close();
+			conn.close();
+			return resultCash;
+		} else {
+			System.out.println("수정실패");	
+			
+			stmt.close();
+			conn.close();
+			return null;
+		}
+	}
 	// deleteCashAction.jsp
 	public Cash deleteCash(Cash paramCash) throws Exception {
 		Cash resultRow = new Cash();
