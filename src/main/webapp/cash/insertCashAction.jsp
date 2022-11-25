@@ -2,28 +2,41 @@
 <%@ page import = "vo.*" %>
 <%@ page import = "dao.*" %>
 <%@ page import = "java.util.*" %>
-<%
+<%@ page import = "java.net.*" %>
+<%	
+	if(session.getAttribute("loginMember") == null) {
+		// 로그인 되지 않은 상태
+		String msg = URLEncoder.encode("잘못된 접근입니다", "utf-8");
+		response.sendRedirect(request.getContextPath()+"/loginForm.jsp?msg="+msg);
+		return;
+	}
 	request.setCharacterEncoding("utf-8");
 
-	Cash paramCash = new Cash();
-	paramCash.setMemberId(request.getParameter("memberId"));
-	paramCash.setCategoryNo(Integer.parseInt(request.getParameter("categoryNo")));
-	paramCash.setCashPrice(Long.parseLong(request.getParameter("cashPrice")));
-	paramCash.setCashDate(request.getParameter("cashDate"));
-	paramCash.setCashMemo(request.getParameter("cashMemo"));
+	// 컨트롤러	
+	String memberId = request.getParameter("memberId");
+	String categoryNo = request.getParameter("categoryNo");
+	String cashPrice = request.getParameter("cashPrice");
+	String cashDate = request.getParameter("cashDate");
+	String cashMemo = request.getParameter("cashMemo");	
+	String cashNo = request.getParameter("cashNo");		
 	
-	int year = 0;
-	int month = 0;
-	int date = 0;
-
-	if ((request.getParameter("year") == null) || (request.getParameter("month") == null) || (request.getParameter("date") == null)) {
-		System.out.println("action 값 없음");
-	} else {
-		year = Integer.parseInt(request.getParameter("year"));
-		month = Integer.parseInt(request.getParameter("month"));
-		date = Integer.parseInt(request.getParameter("date"));
-		System.out.println(year+"-"+month+"-"+date+"action");
+	String year = request.getParameter("year");
+	String month = request.getParameter("month");
+	String date = request.getParameter("date");
+	
+	if(request.getParameter("memberId") == null || request.getParameter("categoryNo") == null || request.getParameter("cashPrice") == null || request.getParameter("cashDate") == null || request.getParameter("cashMemo") == null
+		|| request.getParameter("memberId") == "" || request.getParameter("categoryNo") == "" || request.getParameter("cashPrice") == "" || request.getParameter("cashDate") == "" || request.getParameter("cashMemo") == "") {
+		String msg = URLEncoder.encode("모든 정보를 입력하세요", "utf-8"); //미입력 방지, get방식 주소창에 문자열 인코딩
+		response.sendRedirect(request.getContextPath()+"/cash/cashDateList.jsp?cashNo="+cashNo+"&msg="+msg+"&year="+year+"&month="+month+"&date="+date);
+		return;
 	}
+	
+	Cash paramCash = new Cash();
+	paramCash.setMemberId(memberId);
+	paramCash.setCategoryNo(Integer.parseInt(categoryNo));
+	paramCash.setCashPrice(Long.parseLong(cashPrice));
+	paramCash.setCashDate(cashDate);
+	paramCash.setCashMemo(cashMemo);
 	
 	// 분리된 모델 호출
 	CashDao cashDao = new CashDao();

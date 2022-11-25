@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +9,16 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-	<h1 class="text-center mt-3">로그인</h1>	
+	<h1 class="text-center mt-3">회원가입</h1>
+	<!-- msg parameter값이 있으면 출력 -->
+	<%
+		String msg = request.getParameter("msg");
+		if(msg != null) {
+	%>
+			<div class="text-red text-center" id="msg"><%=msg%></div> <!-- 제목을 입력하시오, 내용을 입력하시오 -->
+	<%
+		}
+	%>
 	<div class="container">
 		<form action="<%=request.getContextPath()%>/insertMemberAction.jsp" method="post">
 			<table class = "table">

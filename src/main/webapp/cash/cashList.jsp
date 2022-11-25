@@ -2,9 +2,15 @@
 <%@ page import="dao.*" %>
 <%@ page import="vo.*" %>
 <%@ page import = "java.util.*" %> <!-- Calendar Arraylist -->
+<%@ page import = "java.net.*" %>
 <%
-	// Controller : session, request
-	
+	if(session.getAttribute("loginMember") == null) {
+		// 로그인 되지 않은 상태
+		String msg = URLEncoder.encode("잘못된 접근입니다", "utf-8");
+		response.sendRedirect(request.getContextPath()+"/loginForm.jsp?msg="+msg);
+		return;
+	}
+	// 컨트롤러 : session, request
 	// session에 저장된 멤버(현재 로그인 된 사용자)
 	Member loginMember = (Member)session.getAttribute("loginMember");
 	
@@ -65,7 +71,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>cashList</title>
 	<!-- 부트스트랩5 -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
@@ -73,9 +79,18 @@
 <body>
 	<div>		
 		<!-- 로그인 정보(세션 loginMember 변수) 출력 -->
-		<%=loginMember.getMemberName()%>님 반갑습니다.		
+		<%=loginMember.getMemberName()%>님 반갑습니다.
 		<a type="btn" class="btn btn-info" href="<%=request.getContextPath()%>/updateMemberForm.jsp">내정보</a>
 		<a type="btn" class="btn btn-danger" href="<%=request.getContextPath()%>/logout.jsp">로그아웃</a>
+		<a type="btn" class="btn btn-danger" href="<%=request.getContextPath()%>/deleteMemberForm.jsp">회원탈퇴</a>
+		<%
+			System.out.println(loginMember.getMemberLevel()+"레벨");
+			if(loginMember.getMemberLevel() > 0) {
+		%>
+				<a type="btn" class="btn btn-dark" href="<%=request.getContextPath()%>/admin/adminMain.jsp">관리자 페이지</a>
+		<%	
+			}
+		%>
 	</div>
 	<div>
 		<a href="<%=request.getContextPath()%>/cash/cashList.jsp?year=<%=year%>&month=<%=month-1%>">[이전달]</a>

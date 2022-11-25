@@ -2,18 +2,20 @@
 <%@ page import = "vo.*" %>
 <%@ page import = "dao.*" %>
 <%@ page import = "java.sql.*" %>
+<%@ page import = "java.net.*" %>
 <%
+	// 컨트롤러	
 	request.setCharacterEncoding("utf-8");
 
 	if(request.getParameter("memberId") == null
 	|| request.getParameter("memberPw") == null 
 	|| request.getParameter("memberId") == "" 
 	|| request.getParameter("memberPw") == "") {
+	String msg = URLEncoder.encode("아이디와 패스워드를 입력해주세요", "utf-8");
 	response.sendRedirect(request.getContextPath()+"/loginForm.jsp");
 	return;
 	}
 	
-	//1 컨트롤러	
 	String memberId = request.getParameter("memberId");
 	String memberPw = request.getParameter("memberPw");
 	System.out.println(memberId+""+memberPw);
@@ -35,32 +37,4 @@
 	
 	// redirect
 	response.sendRedirect(request.getContextPath()+redirectUrl);
-	/*
-	//2 모델
-	Class.forName("org.mariadb.jdbc.Driver");
-	Connection conn = DriverManager.getConnection("jdbc:mariadb://localhost/cashbook","root","java1234"); //dbUrl, dbUser, dbPw
-	
-	String sql = "SELECT member_id memberId, member_name memberName, member_pw memberPW FROM member WHERE member_id = ? AND member_pw = PASSWORD(?)";
-	PreparedStatement stmt = conn.prepareStatement(sql);
-	// getter 사용
-	stmt.setString(1, member.getMemberId());
-	stmt.setString(2, member.getMemberPw());
-	
-	ResultSet rs = stmt.executeQuery();
-	String targetUrl = "/loginForm.jsp";
-	if(rs.next()) {
-		// 로그인 성공!
-		Member loginMem = new Member();
-		loginMem.setMemberId(rs.getString("memberId"));
-		loginMem.setMemberPw(rs.getString("memberPw"));
-		session.setAttribute("loginMem", loginMem); // 키 : "loginEmp", 값 :Object object = loginEmp;
-		targetUrl = "/cash/cashList.jsp";
-	}
-	rs.close();
-	stmt.close();
-	conn.close();
-	response.sendRedirect(request.getContextPath()+targetUrl);
-	*/
-	
-	//3 뷰
 %>

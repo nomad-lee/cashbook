@@ -1,4 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import = "dao.*" %>
+<%@ page import = "vo.*" %>
+<%@ page import = "java.util.*" %>
+<%
+	//페이징
+	int currentPage = 1;
+	if(request.getParameter("currentPage") != null) {
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+	}
+	int rowPerPage = 5;
+	int beginRow = (currentPage-1)*rowPerPage;
+	int cnt = 0;	// 전체 행 개수
+	// int lastPage = 0;
+	
+	NoticeDao noticeDao = new NoticeDao();
+	ArrayList<Notice> list = noticeDao.selectNoticeListByPage(beginRow, rowPerPage);	
+%>
 
 <!DOCTYPE html>
 <html>
@@ -10,7 +27,37 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-	<h1 class="text-center mt-3">로그인</h1>	
+	<!-- 공지(5개)목록 페이징 -->
+	<div>
+		<h1>공지사항</h1>
+		<table border="1" class="table">
+			<tr>
+				<th>공지내용</th>
+				<th>날짜</th>
+			</tr>
+			<%
+				for(Notice n : list) {
+			%>
+					<tr>
+						<td><%=n.getNoticeMemo()%></td>
+						<td><%=n.getCreatedate()%></td>
+					</tr>
+			<%		
+				}
+			%>
+		</table>
+	</div>
+	
+	<!-- msg parameter값이 있으면 출력 -->
+	<%
+		String msg = request.getParameter("msg");
+		if(msg != null) {
+	%>
+			<div class="text-red text-center" id="msg"><%=msg%></div> <!-- 제목을 입력하시오, 내용을 입력하시오 -->
+	<%
+		}
+	%>
+	<h1 class="text-center mt-3">로그인</h1>
 	<div class="container">
 		<form action="<%=request.getContextPath()%>/loginAction.jsp" method="post">
 			<table class = "table">

@@ -1,9 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import = "java.util.*" %>
-<%@ page import = "dao.*" %>
 <%@ page import = "vo.*" %>
+<%@ page import = "dao.*" %>
+<%@ page import = "java.util.*" %>
+<%@ page import = "java.net.*" %>
 <%	
-	//C
+	if(session.getAttribute("loginMember") == null) {
+		// 로그인 되지 않은 상태
+		String msg = URLEncoder.encode("잘못된 접근입니다", "utf-8");
+		response.sendRedirect(request.getContextPath()+"/loginForm.jsp?msg="+msg);
+		return;
+	}
+	//컨트롤러
 	Member loginMember = (Member)session.getAttribute("loginMember");
 	
 	int year = 0;
@@ -25,7 +32,7 @@
 		System.out.println(year+"-"+month+"-"+date+"날짜있음");
 	}
 	
-	//M	
+	// 분리된 모델 호출
 	CategoryDao categoryDao = new CategoryDao();
 	ArrayList<Category> categoryList = categoryDao.selectCategoryList();
 	
@@ -80,6 +87,15 @@
 				</td>
 			</tr>
 		</table>
+		<!-- msg parameter값이 있으면 출력 -->
+		<%
+			String msg = request.getParameter("msg");
+			if(msg != null) {
+		%>
+				<div class="text-red text-center" id="msg"><%=msg%></div> <!-- 제목을 입력하시오, 내용을 입력하시오 -->
+		<%
+			}
+		%>
 		<button type="submit">수정완료</button>
 	</form>
 </body>
