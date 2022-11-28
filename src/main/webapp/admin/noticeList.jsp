@@ -49,24 +49,26 @@
 	<div>
 		<!-- noticeList contents... -->
 		<h1>공지</h1>
-		<a href="">공지입력</a>
+		<a href="<%=request.getContextPath()%>/admin/insertNoticeForm.jsp">공지입력</a>
 		<table class="table">
 			<tr>
+				<th>공지번호</th>
 				<th>공지내용</th>
 				<th>공지날짜</th>
 				<th>수정</th>
-				<th>삭제</th>			
+				<th>삭제</th>	
 			</tr>
 			<%
 				for(Notice n : list) {
 			%>
 					<tr>
+						<td><%=n.getNoticeNo()%></td>
 						<td><%=n.getNoticeMemo()%></td>
 						<td><%=n.getCreatedate()%></td>
-						<td><a class="btn" href="<%=request.getContextPath()%>/cash/updateNoticeForm.jsp">✏️</a></td>
-						<td><a class="btn btn-danger" href="<%=request.getContextPath()%>/cash/deleteCashAction.jsp>">X</a></td>
+						<td><a class="btn" href="<%=request.getContextPath()%>/admin/updateNoticeForm.jsp?noticeNo=<%=n.getNoticeNo()%>&createdate=<%=n.getCreatedate()%>&noticeMemo=<%=n.getNoticeMemo()%>">✏️</a></td>
+						<td><a class="btn btn-danger" href="<%=request.getContextPath()%>/admin/deleteNoticeAction.jsp?noticeNo=<%=n.getNoticeNo()%>&createdate=<%=n.getCreatedate()%>">X</a></td>
 					</tr>
-			<%					
+			<%
 				}
 			%>
 		</table>

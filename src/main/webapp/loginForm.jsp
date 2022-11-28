@@ -32,6 +32,7 @@
 		<h1>공지사항</h1>
 		<table border="1" class="table">
 			<tr>
+				<th>공지번호</th>
 				<th>공지내용</th>
 				<th>날짜</th>
 			</tr>
@@ -39,6 +40,7 @@
 				for(Notice n : list) {
 			%>
 					<tr>
+						<td><%=n.getNoticeNo()%></td>
 						<td><%=n.getNoticeMemo()%></td>
 						<td><%=n.getCreatedate()%></td>
 					</tr>

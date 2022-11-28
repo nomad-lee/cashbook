@@ -9,10 +9,25 @@ import vo.Notice;
 public class MemberDao {
 	
 	// 관리자 : 멤버레벨수정
-	public int updateMemberLevel(Member member) {
-		return 0;
+	public int updateMemberLevel(Member member) throws Exception  {
+		int row = 0;
+		String sql = "UPDATE member SET member_level = ? WHERE member_no = ?";
+		
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		conn = dbUtil.getConnection();
+		stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, member.getMemberLevel());
+		stmt.setInt(2, member.getMemberNo());
+		
+		row = stmt.executeUpdate();
+		
+		dbUtil.close(null, stmt, conn);
+		return row;
 	}
-	
 	// 관리자 : 멤버수
 	public int selectMemberCount() {
 		return 0;
@@ -26,7 +41,7 @@ public class MemberDao {
 		ArrayList<Member> list = new ArrayList<Member>();
 		DBUtil dbUtil = new DBUtil();
 		Connection conn = dbUtil.getConnection();
-		String sql = "SELECT member_no memberNo, member_id memberId, member_level memberLevel, member_name memberName, updatedate, createdate FROM member ORDER BY createdate DESC LIMIT ?, ?";
+		String sql = "SELECT member_no memberNo, member_id memberId, member_level memberLevel, member_name memberName, updatedate, createdate FROM member ORDER BY member_no DESC, createdate DESC LIMIT ?, ?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setInt(1, beginRow);
 		stmt.setInt(2, rowPerPage);
@@ -44,10 +59,24 @@ public class MemberDao {
 		return list;
 	}
 	// 관리자 멤버 강퇴
-		public int deleteMemberByAdmin(Member member) {
-			return 0;
-		}
-	
+	public int deleteMemberByAdmin(Member member) throws Exception {
+		int row = 0;
+		
+		String sql = "DELETE FROM member WHERE member_no = ?";
+		
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		
+		conn = dbUtil.getConnection();
+		stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, member.getMemberNo());
+		row = stmt.executeUpdate();
+		
+		dbUtil.close(null, stmt, conn);;
+		
+		return row;
+	}
 	//회원가입 1) id 중복확인 2) 회원가입
 	
 	//반환값 t:이미존재, f:사용가능

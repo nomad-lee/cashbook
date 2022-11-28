@@ -5,13 +5,13 @@
 <%@ page import = "java.util.*" %>
 <%
 	// 컨트롤러
-	if(session.getAttribute("loginMember") == null) {
+	Member loginMember = (Member)session.getAttribute("loginMember");
+	if(loginMember == null || loginMember.getMemberLevel() < 1) {
 		// 로그인 되지 않은 상태
 		String msg = URLEncoder.encode("잘못된 접근입니다", "utf-8");
-		response.sendRedirect(request.getContextPath()+"/loginForm.jsp?msg="+msg);
+		response.sendRedirect(request.getContextPath()+"/loginForm.jsp");
 		return;
 	}
-	Member loginMember = (Member)session.getAttribute("login");
 	// 모델 : notice list
 
 	//최근공지 5개, 최근멤버 5명

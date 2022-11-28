@@ -13,17 +13,14 @@
 	request.setCharacterEncoding("utf-8");
 
 	// 컨트롤러
-	String memberId = request.getParameter("memberId");
-	String memberPw = request.getParameter("memberPw");
-	
-	Member member = new Member();
-	member.setMemberNo(Integer.parseInt(request.getParameter("MemberNo")));
-	member.setMemberId(memberId);
-	member.setMemberPw(memberPw);
+	int categoryNo = Integer.parseInt(request.getParameter("categoryNo"));
+
+	Category category = new Category();
+	category.setCategoryNo(categoryNo);
 	
 	// 분리된 모델 호출
-	MemberDao memberDao = new MemberDao();
-	Member resultRow = memberDao.deleteMember(member);	
+	CategoryDao categoryDao = new CategoryDao();
+	int resultRow = categoryDao.deleteCategory(category);	
 
-	response.sendRedirect(request.getContextPath()+"/loginForm.jsp");
+	response.sendRedirect(request.getContextPath()+"/admin/noticeList.jsp");
 %>

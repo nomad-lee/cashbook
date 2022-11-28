@@ -77,7 +77,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-	<div>		
+	<div>
 		<!-- 로그인 정보(세션 loginMember 변수) 출력 -->
 		<%=loginMember.getMemberName()%>님 반갑습니다.
 		<a type="btn" class="btn btn-info" href="<%=request.getContextPath()%>/updateMemberForm.jsp">내정보</a>

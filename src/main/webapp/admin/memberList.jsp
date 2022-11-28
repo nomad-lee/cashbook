@@ -69,8 +69,8 @@
 						<td><%=m.getMemberName()%></td>
 						<td><%=m.getUpdatedate()%></td>
 						<td><%=m.getCreatedate()%></td>
-						<td><a class="btn" href="<%=request.getContextPath()%>/cash/updateNoticeForm.jsp">✏️</a></td>
-						<td><a class="btn btn-danger" href="<%=request.getContextPath()%>/cash/deleteCashAction.jsp>">X</a></td>
+						<td><a class="btn btn-dark" href="<%=request.getContextPath()%>/admin/updateMemberLevel.jsp?memberNo=<%=m.getMemberNo()%>&memberLevel=<%=m.getMemberLevel()%>">0 OR 1</a></td>
+						<td><a class="btn btn-danger" href="<%=request.getContextPath()%>/admin/kickMemberAction.jsp?memberNo=<%=m.getMemberNo()%>">X</a></td>
 					</tr>
 			<%				
 					
