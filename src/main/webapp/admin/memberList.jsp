@@ -11,9 +11,8 @@
 		String msg = URLEncoder.encode("잘못된 접근입니다", "utf-8");
 		response.sendRedirect(request.getContextPath()+"/loginForm.jsp");
 		return;
-	}
-	
-	//페이징
+	}	
+	// 페이징
 	int currentPage = 1;
 	if(request.getParameter("currentPage") != null) {
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
@@ -72,8 +71,7 @@
 						<td><a class="btn btn-dark" href="<%=request.getContextPath()%>/admin/updateMemberLevel.jsp?memberNo=<%=m.getMemberNo()%>&memberLevel=<%=m.getMemberLevel()%>">0 OR 1</a></td>
 						<td><a class="btn btn-danger" href="<%=request.getContextPath()%>/admin/kickMemberAction.jsp?memberNo=<%=m.getMemberNo()%>">X</a></td>
 					</tr>
-			<%				
-					
+			<%					
 				}
 			%>
 		</table>

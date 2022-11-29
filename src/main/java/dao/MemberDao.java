@@ -135,7 +135,7 @@ public class MemberDao {
 	*/	
 	// 로그인
 	public Member login(Member paramMember) throws Exception {
-		Member resultMember = new Member();
+		Member resultMember = null;
 		
 		// DB를 연결하는 코드가 Dao 메서드에 거의 공통적으로 중복
 		// 중복되는 코드를 하나의 메서드로 
@@ -197,7 +197,7 @@ public class MemberDao {
 		String sql = "DELETE FROM member WHERE member_id = ? AND member_pw = PASSWORD(?)";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, member.getMemberId());
-		stmt.setString(1, member.getMemberPw());
+		stmt.setString(2, member.getMemberPw());
 		
 		int row = stmt.executeUpdate();
 		if(row ==1) {

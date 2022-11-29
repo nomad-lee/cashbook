@@ -21,12 +21,13 @@
 	Category category = new Category();
 	category.setCategoryNo(categoryNo);
 	category.setCategoryKind(categoryKind);
+	category.setCategoryName(categoryName);
 	category.setUpdatedate(updatedate);
 	
 	if(categoryKind == null || categoryName == null || updatedate == null
 			|| categoryKind == ""|| categoryName == ""|| updatedate == "") {
 		String msg = URLEncoder.encode("모든 정보를 입력하세요", "utf-8"); //미입력 방지, get방식 주소창에 문자열 인코딩
-		response.sendRedirect(request.getContextPath()+"/admin/updateNoticeForm.jsp?msg="+msg);
+		response.sendRedirect(request.getContextPath()+"/admin/updateCategoryForm.jsp?msg="+msg);
 		return;
 	}
 	// 분리된 모델 호출

@@ -2,6 +2,7 @@
 <%@ page import = "vo.*" %>
 <%@ page import = "dao.*" %>
 <%@ page import = "java.net.*" %>
+<%@ page import = "java.time.*" %>
 <%
 	Member loginMember = (Member)session.getAttribute("loginMember");
 	if(loginMember == null || loginMember.getMemberLevel() < 1) {
@@ -11,11 +12,11 @@
 		return;
 	}
 	int categoryNo = Integer.parseInt(request.getParameter("categoryNo"));
-	String today = request.getParameter("updatedate");
-	System.out.println(request.getParameter("updatedate"));
+	LocalDate today = LocalDate.now();
 	
 	CategoryDao categoryDao = new CategoryDao();
 	Category resultcategory = categoryDao.selectCategoryOne(categoryNo);
+	System.out.println(categoryNo+"카테고리 num");
 %>
 <!DOCTYPE html>
 <html>
@@ -38,6 +39,7 @@
 		}
 	%>
 	<form action="<%=request.getContextPath()%>/admin/updateCategoryAction.jsp" method="post">
+		<input type="hidden" name="categoryNo" value="<%=resultcategory.getCategoryNo()%>">
 		<table class = "table">
 			<tr>
 				<td>수입/지출</td>
@@ -63,7 +65,7 @@
 			</tr>
 			<tr>
 				<td>수정일</td>
-				<td><input type="text" class="form-control" name="createdate" value="<%=today%>" readonly></td>
+				<td><input type="text" class="form-control" name="updatedate" value="<%=today%>" readonly></td>
 			</tr>
 		</table>
 		<button type="submit" class="btn btn-secondary">수정완료</button>

@@ -9,6 +9,7 @@
 		return;
 	}
 	Member loginMember = (Member)session.getAttribute("loginMember");
+	System.out.println(loginMember.getMemberLevel()+"Form레벨");
 %>
 <!DOCTYPE html>
 <html>

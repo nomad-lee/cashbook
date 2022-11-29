@@ -4,7 +4,7 @@
 <%@ page import = "java.net.*" %>
 <% 
 	Member loginMember = (Member)session.getAttribute("loginMember");
-	if(loginMember == null || loginMember.getMemberLevel() < 1) {
+	if(loginMember == null) {
 		// 로그인 되지 않은 상태
 		String msg = URLEncoder.encode("잘못된 접근입니다", "utf-8");
 		response.sendRedirect(request.getContextPath()+"/loginForm.jsp");
@@ -13,14 +13,14 @@
 	request.setCharacterEncoding("utf-8");
 
 	// 컨트롤러
-	int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
+	int helpNo = Integer.parseInt(request.getParameter("helpNo"));
 
-	Notice notice = new Notice();
-	notice.setNoticeNo(noticeNo);
+	Help help= new Help();
+	help.setHelpNo(helpNo);
 	
 	// 분리된 모델 호출
-	NoticeDao noticeDao = new NoticeDao();
-	int resultRow = noticeDao.deleteNotice(notice);	
+	HelpDao helpDao = new HelpDao();
+	int resultRow = helpDao.deleteHelp(help);	
 
-	response.sendRedirect(request.getContextPath()+"/admin/noticeList.jsp");
+	response.sendRedirect(request.getContextPath()+"/help/helpList.jsp");
 %>

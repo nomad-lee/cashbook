@@ -13,13 +13,13 @@
 		return;
 	}	
 	//페이징
-	int currentPage = 1;
+/* 	int currentPage = 1;
 	if(request.getParameter("currentPage") != null) {
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 	}
 	int rowPerPage = 10;
 	int beginRow = (currentPage-1)*rowPerPage;
-	int cnt = 0;	// 전체 행 개수
+	int cnt = 0;	// 전체 행 개수 */
 	// int lastPage = 0;		
 	
 	// 모델
@@ -69,8 +69,7 @@
 						<td><a class="btn" href="<%=request.getContextPath()%>/admin/updateCategoryForm.jsp?categoryNo=<%=c.getCategoryNo()%>&updatedate=<%=c.getUpdatedate()%>">✏️</a></td>
 						<td><a class="btn btn-danger" href="<%=request.getContextPath()%>/admin/deleteCategoryAction.jsp?categoryNo=<%=c.getCategoryNo()%>">X</a></td>
 					</tr>
-			<%				
-					
+			<%					
 				}
 			%>
 		</table>

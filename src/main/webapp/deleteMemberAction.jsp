@@ -13,17 +13,18 @@
 	request.setCharacterEncoding("utf-8");
 
 	// 컨트롤러
+	int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 	String memberId = request.getParameter("memberId");
 	String memberPw = request.getParameter("memberPw");
 	
 	Member member = new Member();
-	member.setMemberNo(Integer.parseInt(request.getParameter("MemberNo")));
+	member.setMemberNo(memberNo);
 	member.setMemberId(memberId);
 	member.setMemberPw(memberPw);
 	
 	// 분리된 모델 호출
 	MemberDao memberDao = new MemberDao();
-	Member resultRow = memberDao.deleteMember(member);	
+	Member resultRow = memberDao.deleteMember(member);
 
 	response.sendRedirect(request.getContextPath()+"/loginForm.jsp");
 %>

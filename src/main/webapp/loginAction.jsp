@@ -31,8 +31,8 @@
 	String redirectUrl = "/loginForm.jsp";
 	
 	if(resultMember != null) {
-		redirectUrl = "/cash/cashList.jsp";
 		session.setAttribute("loginMember", resultMember); //session안에 로그인 아이디 & 이름을 저장
+		redirectUrl = "/cash/cashList.jsp";
 	}
 	
 	// redirect

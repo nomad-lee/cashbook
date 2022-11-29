@@ -10,12 +10,13 @@
 		response.sendRedirect(request.getContextPath()+"/loginForm.jsp?msg="+msg);
 		return;
 	}
+	
 	request.setCharacterEncoding("utf-8");
 	
 	// 컨트롤러
-	Member updateMember = new Member();
-	updateMember.setMemberId(request.getParameter("memberId"));
-	updateMember.setMemberName(request.getParameter("memberName"));
+	Member loginMember = (Member)session.getAttribute("loginMember");
+	loginMember.setMemberId(request.getParameter("memberId"));
+	loginMember.setMemberName(request.getParameter("memberName"));
 	System.out.println(request.getParameter("memberId")+""+request.getParameter("memberName")+"수정 action");
 	
 	if(request.getParameter("memberId") == null || request.getParameter("memberName") == null
@@ -27,15 +28,16 @@
 	
 	// 분리된 모델 호출
 	MemberDao memberDao = new MemberDao();
-	Member loginMember = memberDao.updateMember(updateMember);
+	Member updateMember = memberDao.updateMember(loginMember);
 		
-	if(loginMember != null){
-		session.setAttribute("loginMember", updateMember);
+	if(updateMember != null){
+		session.setAttribute("loginMember", loginMember);
 		response.sendRedirect(request.getContextPath()+"/cash/cashList.jsp");
-		System.out.println(updateMember+"수정완");
+		System.out.println(loginMember+"수정완");
 		
 	} else {
 		response.sendRedirect(request.getContextPath()+"/cash/updateMemberForm.jsp");
 		System.out.println("수정실패");
 	}
+	System.out.println(updateMember.getMemberLevel()+"Action레벨");
 %>

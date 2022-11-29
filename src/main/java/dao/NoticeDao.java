@@ -22,9 +22,7 @@ public class NoticeDao {
 			System.out.println("입력성공");
 		} else {
 			System.out.println("입력실패");
-		}
-		
-		// 완성필요
+		}		
 		return row;
 	}
 	// 공지수정 전 - 조회
@@ -46,8 +44,7 @@ public class NoticeDao {
 			notice.setNoticeNo(rs.getInt("noticeNo"));
 			notice.setNoticeMemo(rs.getString("noticeMemo"));
 			notice.setCreatedate(rs.getString("createdate"));
-		}
-		
+		}		
 		dbUtil.close(rs, stmt, conn);
 		return notice;	
 	}
