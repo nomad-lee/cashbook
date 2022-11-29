@@ -4,7 +4,7 @@
 <%@ page import = "java.net.*" %>
 <%@ page import = "java.util.*" %>
 <%
-	Member loginMember = (Member)session.getAttribute("login");
+	Member loginMember = (Member)session.getAttribute("loginMember");
 	if(loginMember == null || loginMember.getMemberLevel() < 1) {
 		// 로그인 되지 않은 상태
 		String msg = URLEncoder.encode("잘못된 접근입니다", "utf-8");
@@ -30,12 +30,21 @@
 <head>
 <meta charset="UTF-8">
 <title>helpListAll</title>
+	<!-- 부트스트랩5 -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 	<!-- header -->	
+	<ul>
+		<li><a href="<%=request.getContextPath()%>/admin/noticeList.jsp">공지관리</a></li>
+		<li><a href="<%=request.getContextPath()%>/admin/categoryList.jsp">카테고리관리</a></li>
+		<li><a href="<%=request.getContextPath()%>/admin/memberList.jsp">멤버관리(목록, 레벨수정, 강제탈퇴)</a></li>
+		<li><a href="<%=request.getContextPath()%>/admin/helpListAll.jsp">고객센터 관리</a></li>
+	</ul>
 	
 	<!-- 고객센터 문의 목록 -->
-	<table>
+	<table class="table">
 		<tr>
 			<th>문의내용</th>
 			<th>회원ID</th>
@@ -45,7 +54,7 @@
 			<th>답변추가 / 수정 / 삭제</th>
 		</tr>
 		<%
-			for(HashMap<String, Object> m : list)
+			for(HashMap<String, Object> m : list) {
 		%>
 				<tr>
 					<td><%=m.get("helpMemo")%></td>
@@ -64,12 +73,12 @@
 								<a href="<%=request.getContextPath()%>/admin/updateCommentForm.jsp?helpNo=<%=m.get("helpNo")%>"></a>
 								<a href="<%=request.getContextPath()%>/admin/deleteCommentForm.jsp?helpNo=<%=m.get("helpNo")%>"></a>
 						<%
-						
+							}
 						%>
 					</td>
 				</tr>
 		<%
-		
+			}
 		%>
 	</table>
 	
