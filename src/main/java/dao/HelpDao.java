@@ -14,7 +14,7 @@ public class HelpDao {
 	//관리자 selectHelpList 오버로딩
 	public ArrayList<HashMap<String, Object>> selectHelpList(int beginRow, int rowPerPage) throws Exception {
 		ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String,Object>>();
-		String sql = "SELECT h.help_no helpNo, h.member_id MemberId, h.help_memo helpMemo, h.createdate helpCreatedate, c.comment_memo commentMemo, c.createdate commentCreatedate"
+		String sql = "SELECT h.help_no helpNo, h.member_id MemberId, h.help_memo helpMemo, h.createdate helpCreatedate, c.comment_no commentNo, c.comment_memo commentMemo, c.createdate commentCreatedate"
 					+" FROM help h LEFT JOIN comment c ON h.help_no = c.help_no LIMIT ?, ?";
 		
 		DBUtil dbUtil = new DBUtil();
@@ -34,6 +34,7 @@ public class HelpDao {
 			m.put("memberId", rs.getString("memberId"));
 			m.put("helpMemo", rs.getString("helpMemo"));
 			m.put("helpCreatedate", rs.getString("helpCreatedate"));
+			m.put("commentNo", rs.getString("commentNo"));
 			m.put("commentMemo", rs.getString("commentMemo"));
 			m.put("commentCreatedate", rs.getString("commentCreatedate"));
 			list.add(m);

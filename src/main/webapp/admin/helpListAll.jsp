@@ -66,12 +66,12 @@
 						<%
 							if(m.get("commentMemo") == null) {
 						%>
-								<a href="<%=request.getContextPath()%>/admin/insertCommentForm.jsp?helpNo=<%=m.get("helpNo")%>">답변입력</a>
+								<a href="<%=request.getContextPath()%>/admin/insertCommentForm.jsp?helpNo=<%=m.get("helpNo")%>&helpMemo=<%=m.get("helpMemo")%>&memberId=<%=m.get("memberId")%>">답변입력</a>
 						<%
 							} else {
 						%>
-								<a href="<%=request.getContextPath()%>/admin/updateCommentForm.jsp?helpNo=<%=m.get("helpNo")%>"></a>
-								<a href="<%=request.getContextPath()%>/admin/deleteCommentForm.jsp?helpNo=<%=m.get("helpNo")%>"></a>
+								<a href="<%=request.getContextPath()%>/admin/updateCommentForm.jsp?commentNo=<%=m.get("commentNo")%>">수정</a>
+								<a href="<%=request.getContextPath()%>/admin/deleteCommentAction.jsp?commentNo=<%=m.get("commentNo")%>">삭제</a>
 						<%
 							}
 						%>

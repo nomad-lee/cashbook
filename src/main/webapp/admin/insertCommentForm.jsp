@@ -4,14 +4,20 @@
 <%@ page import = "java.time.*" %>
 <%@ page import = "java.time.format.*" %>
 <%
+	request.setCharacterEncoding("utf-8");
+
 	Member loginMember = (Member)session.getAttribute("loginMember");
 	if(loginMember == null || loginMember.getMemberLevel() < 1) {
 		// 로그인 되지 않은 상태
 		String msg = URLEncoder.encode("잘못된 접근입니다", "utf-8");
 		response.sendRedirect(request.getContextPath()+"/loginForm.jsp?msg="+msg);
 		return;
-	}	
-
+	}
+	int helpNo = Integer.parseInt(request.getParameter("helpNo"));
+	String helpMemo = request.getParameter("helpMemo");
+	String memberId = request.getParameter("memberId");
+	System.out.println(helpNo+"Form helpNo");
+		
 	LocalDateTime currentDate = LocalDateTime.now();
 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 	String formatted = currentDate.format(formatter);
@@ -38,18 +44,24 @@
 		}
 	%>
 	<div class="container">
-		<form action="<%=request.getContextPath()%>/admin/insertNoticeAction.jsp" method="post">
+		<form action="<%=request.getContextPath()%>/admin/insertCommentAction.jsp" method="post">
+			<input type="hidden" name="helpNo" value="<%=helpNo%>">
+			<input type="hidden" name="memberId" value="<%=memberId%>">
 			<table class = "table">
 				<tr>
-					<td>공지내용</td>
-					<td><input type="text" class="form-control" name="noticeMemo"></td>
+					<td>문의내용</td>
+					<td><input type="text" class="form-control" name="helpMemo" value="<%=helpMemo%>" readonly></td>
 				</tr>
 				<tr>
-					<td>공지일</td>
+					<td>답변내용</td>
+					<td><input type="text" class="form-control" name="commentMemo" value=""></td>
+				</tr>
+				<tr>
+					<td>답변날짜</td>
 					<td><input type="text" class="form-control" name="createdate" value="<%=formatted%>" readonly></td>
 				</tr>
 			</table>
-			<button type="submit" class="btn btn-secondary">추가완료</button>
+			<button type="submit" class="btn btn-secondary">답변완료</button>
 		</form>
 	</div>
 </body>
