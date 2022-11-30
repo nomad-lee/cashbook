@@ -12,19 +12,22 @@
 		response.sendRedirect(request.getContextPath()+"/loginForm.jsp?msg="+msg);
 		return;
 	}
-	//페이징
-/* 	int currentPage = 1;
+	// 페이징
+ 	int currentPage = 1;
 	if(request.getParameter("currentPage") != null) {
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 	}
 	int rowPerPage = 10;
-	int beginRow = (currentPage-1)*rowPerPage;
-	int cnt = 0;	// 전체 행 개수 */
-	// int lastPage = 0;		
+	int beginRow = (currentPage-1)*rowPerPage;	
 	
 	// 모델
 	CategoryDao categoryDao = new CategoryDao();
-	ArrayList<Category> list = categoryDao.selectCategoryListByAdmin();
+	int cnt = categoryDao.selectCategoryCount(); // 전체 행 개수
+	int lastPage = cnt / rowPerPage;
+	if(cnt % rowPerPage != 0) {
+		lastPage++;
+	}
+	ArrayList<Category> list = categoryDao.selectCategoryListByAdmin(beginRow, rowPerPage);
 	// 뷰
 %>
 <!DOCTYPE html>
@@ -74,6 +77,33 @@
 				}
 			%>
 		</table>
+		<!-- 페이징코드 -->
+		<nav aria-label="pagiantion">
+  			<ul class="pagination justify-content-center mt-3">		
+	  			<li class="page-item">
+					<a id=pnav1 class="page-link" href="<%=request.getContextPath()%>/admin/categoryList.jsp?currentPage=1%>">처음으로</a>
+				</li>
+				<%
+					if(currentPage > 1) {
+				%>
+					<li class="page-item">
+						<a id=pnav2 class="page-link" href="<%=request.getContextPath()%>/admin/categoryList.jsp?currentPage=<%=currentPage-1%>">이전</a>		
+					</li>
+				<%
+					}
+					if(currentPage < lastPage) {
+				%>
+					<li class="page-item">
+						<a id=pnav3 class="page-link" href="<%=request.getContextPath()%>/admin/categoryList.jsp?currentPage=<%=currentPage+1%>">다음</a>		
+					</li>
+				<%
+					}
+				%>
+				<li class="page-item">
+					<a id=pnav4 class="page-link" href="<%=request.getContextPath()%>/admin/categoryList.jsp?currentPage=<%=lastPage%>">마지막</a>
+				</li>
+			</ul>
+		</nav>
 	</div>
 </body>
 </html>

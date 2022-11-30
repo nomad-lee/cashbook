@@ -154,4 +154,24 @@ public class HelpDao {
 		
 		return row;	
 	}
+	//마지막 페이지를 구하기위한 메소드
+	public int selectHelpCount() throws Exception {
+		int count = 0;
+		
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		
+		String sql ="SELECT COUNT(*) FROM help";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		while(rs.next()) {
+			count = rs.getInt("COUNT(*)");
+		}
+		
+		dbUtil.close(rs, stmt, conn);
+		
+		return count;
+	}
 }

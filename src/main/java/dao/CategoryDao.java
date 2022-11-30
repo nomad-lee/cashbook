@@ -30,10 +30,10 @@ public class CategoryDao {
 	}
 	
 	// admin -> 카테고리관리 -> 카테고리목록
-	public ArrayList<Category> selectCategoryListByAdmin() throws Exception {
+	public ArrayList<Category> selectCategoryListByAdmin(int beginRow, int rowPerPage) throws Exception {
 		ArrayList<Category> list = new ArrayList<Category>();
 		
-		String sql = "SELECT category_no categoryNo, category_kind categoryKind, category_name categoryName, updatedate, createdate FROM category";
+		String sql = "SELECT category_no categoryNo, category_kind categoryKind, category_name categoryName, updatedate, createdate FROM category LIMIT ?, ?";
 		
 		DBUtil dbUtil = new DBUtil();
 		
@@ -44,6 +44,8 @@ public class CategoryDao {
 		
 		conn = dbUtil.getConnection();
 		stmt = conn.prepareStatement(sql);
+		stmt.setInt(1, beginRow);
+		stmt.setInt(2, rowPerPage);
 		rs = stmt.executeQuery(); // stmt.executeUpdate(); // 반환
 		
 		while(rs.next()) {
@@ -142,12 +144,24 @@ public class CategoryDao {
 		
 		return row;	
 	}
-	
-	//cash 입력시 <select>목록 출력
-	/*
-	public ArrayList<Category> selectCategoryList() {
-		ArrayList<Category> categoryList = new ArrayList<Category>();
-		//ORDER BY category_kind
-		return categoryList;
-	} */
+	//마지막 페이지를 구하기위한 메소드
+	public int selectCategoryCount() throws Exception {
+		int count = 0;
+		
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		
+		String sql ="SELECT COUNT(*) FROM category";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		while(rs.next()) {
+			count = rs.getInt("COUNT(*)");
+		}
+		
+		dbUtil.close(rs, stmt, conn);
+		
+		return count;
+	}
 }

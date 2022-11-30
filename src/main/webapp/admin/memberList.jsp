@@ -19,11 +19,14 @@
 	}
 	int rowPerPage = 10;
 	int beginRow = (currentPage-1)*rowPerPage;
-	int cnt = 0;	// 전체 행 개수
-	// int lastPage = 0;		
 	
 	// 모델
 	MemberDao memberDao = new MemberDao();
+	int cnt = memberDao.selectMemberCount(); // 전체 행 개수
+	int lastPage = cnt / rowPerPage;
+	if(cnt % rowPerPage != 0) {
+		lastPage++;
+	}
 	ArrayList<Member> list = memberDao.selectMemberListByPage(beginRow, rowPerPage);
 	int memberCount = memberDao.selectMemberCount(); // --> lastPage
 	
@@ -76,6 +79,33 @@
 				}
 			%>
 		</table>
+		<!-- 페이징코드 -->
+		<nav aria-label="pagiantion">
+  			<ul class="pagination justify-content-center mt-3">		
+	  			<li class="page-item">
+					<a id=pnav1 class="page-link" href="<%=request.getContextPath()%>/admin/memberList.jsp?currentPage=1%>">처음으로</a>
+				</li>
+				<%
+					if(currentPage > 1) {
+				%>
+					<li class="page-item">
+						<a id=pnav2 class="page-link" href="<%=request.getContextPath()%>/admin/memberList.jsp?currentPage=<%=currentPage-1%>">이전</a>		
+					</li>
+				<%
+					}
+					if(currentPage < lastPage) {
+				%>
+					<li class="page-item">
+						<a id=pnav3 class="page-link" href="<%=request.getContextPath()%>/admin/memberList.jsp?currentPage=<%=currentPage+1%>">다음</a>		
+					</li>
+				<%
+					}
+				%>
+				<li class="page-item">
+					<a id=pnav4 class="page-link" href="<%=request.getContextPath()%>/admin/memberList.jsp?currentPage=<%=lastPage%>">마지막</a>
+				</li>
+			</ul>
+		</nav>
 	</div>
 </body>
 </html>

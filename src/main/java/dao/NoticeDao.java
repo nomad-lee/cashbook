@@ -88,10 +88,24 @@ public class NoticeDao {
 		
 		return row;	
 	}
-	//마지막 페이지를 구할려면 전체
-	public int selectNoticeCount() {
+	//마지막 페이지를 구하기위한 메소드
+	public int selectNoticeCount() throws Exception {
 		int count = 0;
-		//
+		
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		
+		String sql ="SELECT COUNT(*) FROM notice";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		while(rs.next()) {
+			count = rs.getInt("COUNT(*)");
+		}
+		
+		dbUtil.close(rs, stmt, conn);
+		
 		return count;
 	}
 	

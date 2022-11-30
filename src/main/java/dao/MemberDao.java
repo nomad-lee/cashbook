@@ -28,9 +28,25 @@ public class MemberDao {
 		dbUtil.close(null, stmt, conn);
 		return row;
 	}
-	// 관리자 : 멤버수
-	public int selectMemberCount() {
-		return 0;
+	// 관리자 : 마지막 페이지를 구하기위한 메소드
+	public int selectMemberCount() throws Exception {
+		int count = 0;
+		
+		DBUtil dbUtil = new DBUtil();
+		Connection conn = dbUtil.getConnection();
+		
+		String sql ="SELECT COUNT(*) FROM member";
+		PreparedStatement stmt = conn.prepareStatement(sql);
+		
+		ResultSet rs = stmt.executeQuery();
+		
+		while(rs.next()) {
+			count = rs.getInt("COUNT(*)");
+		}
+		
+		dbUtil.close(rs, stmt, conn);
+		
+		return count;
 	}
 	
 	// 관리자 멤버 리스트

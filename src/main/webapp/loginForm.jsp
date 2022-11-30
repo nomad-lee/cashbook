@@ -11,10 +11,11 @@
 	int rowPerPage = 5;
 	int beginRow = (currentPage-1)*rowPerPage;
 	int cnt = 0;	// 전체 행 개수
-	// int lastPage = 0;
 	
+	// 모델
 	NoticeDao noticeDao = new NoticeDao();
-	ArrayList<Notice> list = noticeDao.selectNoticeListByPage(beginRow, rowPerPage);	
+	int lastPage = noticeDao.selectNoticeCount() / rowPerPage;
+	ArrayList<Notice> list = noticeDao.selectNoticeListByPage(beginRow, rowPerPage);
 %>
 
 <!DOCTYPE html>
@@ -48,6 +49,33 @@
 				}
 			%>
 		</table>
+		<!-- 페이징코드 -->
+		<nav aria-label="pagiantion">
+  			<ul class="pagination justify-content-center mt-3">		
+	  			<li class="page-item">
+					<a id=pnav1 class="page-link" href="<%=request.getContextPath()%>/loginForm.jsp?currentPage=1%>">처음으로</a>
+				</li>
+				<%
+					if(currentPage > 1) {
+				%>
+					<li class="page-item">
+						<a id=pnav2 class="page-link" href="<%=request.getContextPath()%>/loginForm.jsp?currentPage=<%=currentPage-1%>">이전</a>		
+					</li>
+				<%
+					}
+					if(currentPage < lastPage) {
+				%>
+					<li class="page-item">
+						<a id=pnav3 class="page-link" href="<%=request.getContextPath()%>/loginForm.jsp?currentPage=<%=currentPage+1%>">다음</a>		
+					</li>
+				<%
+					}
+				%>
+				<li class="page-item">
+					<a id=pnav4 class="page-link" href="<%=request.getContextPath()%>/loginForm.jsp?currentPage=<%=lastPage%>">마지막</a>
+				</li>
+			</ul>
+		</nav>
 	</div>
 	
 	<!-- msg parameter값이 있으면 출력 -->
@@ -76,5 +104,6 @@
 			<button type="submit" class="btn btn-secondary">로그인</button>
 		</form>
 	</div>
+	
 </body>
 </html>

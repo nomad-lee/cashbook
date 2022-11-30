@@ -4,6 +4,7 @@
 <%@ page import = "java.net.*" %>
 <%@ page import = "java.util.*" %>
 <%
+	// 컨트롤러
 	Member loginMember = (Member)session.getAttribute("loginMember");
 	if(loginMember == null || loginMember.getMemberLevel() < 1) {
 		// 로그인 되지 않은 상태
@@ -18,12 +19,15 @@
 	}
 	int rowPerPage = 10;
 	int beginRow = (currentPage-1)*rowPerPage;
-	int cnt = 0;	// 전체 행 개수
-	// int lastPage = 0;
 	
+	// 모델
 	HelpDao helpDao = new HelpDao();	
+	int cnt = helpDao.selectHelpCount(); // 전체 행 개수
+	int lastPage = cnt / rowPerPage;
+	if(cnt % rowPerPage != 0) {
+		lastPage++;
+	}
 	ArrayList<HashMap<String, Object>> list = helpDao.selectHelpList(beginRow, rowPerPage);
-	//int helpCount = helpDao.selecthelpCount(); // --> lastPage
 %>
 <!DOCTYPE html>
 <html>
@@ -81,7 +85,33 @@
 			}
 		%>
 	</table>
-	
+	<!-- 페이징코드 -->
+	<nav aria-label="pagiantion">
+ 			<ul class="pagination justify-content-center mt-3">		 
+  			<li class="page-item">
+				<a id=pnav1 class="page-link" href="<%=request.getContextPath()%>/admin/helpListAll.jsp?currentPage=1%>">처음으로</a>
+			</li>
+			<%
+				if(currentPage > 1) {
+			%>
+				<li class="page-item">
+					<a id=pnav2 class="page-link" href="<%=request.getContextPath()%>/admin/helpListAll.jsp?currentPage=<%=currentPage-1%>">이전</a>		
+				</li>
+			<%
+				}
+				if(currentPage < lastPage) {
+			%>
+				<li class="page-item">
+					<a id=pnav3 class="page-link" href="<%=request.getContextPath()%>/admin/helpListAll.jsp?currentPage=<%=currentPage+1%>">다음</a>		
+				</li>
+			<%
+				}
+			%>
+			<li class="page-item">
+				<a id=pnav4 class="page-link" href="<%=request.getContextPath()%>/admin/helpListAll.jsp?currentPage=<%=lastPage%>">마지막</a>
+			</li>
+		</ul>
+	</nav>
 	<!-- footer -->
 </body>
 </html>
