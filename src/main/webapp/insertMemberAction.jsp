@@ -24,8 +24,8 @@
 	// 분리된 모델 호출
 	MemberDao memberDao = new MemberDao();
 	if(memberDao.selectMemberIdCk(memberId)) {
-		System.out.println("중복 아이디");
-		response.sendRedirect(request.getContextPath()+"/insertMemberForm.jsp");
+		String msg = URLEncoder.encode("중복된 아이디입니다.", "utf-8");
+		response.sendRedirect(request.getContextPath()+"/insertMemberForm.jsp?msg="+msg);
 		return;
 	}
 	Member resultRow = memberDao.insertMember(paramMember);

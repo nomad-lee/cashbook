@@ -213,7 +213,7 @@ hr {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 0;
+  right: 0;
   z-index: 1;
   background-size: cover;
   background-position: center center; }
@@ -255,7 +255,7 @@ hr {
     .off-canvas-sidebar .logo .simple-text {
       text-transform: uppercase;
       padding: 4px 0px;
-      display: block;
+      display: inline-block;
       font-size: 18px;
       text-align: center;
       font-weight: 400;
@@ -393,7 +393,7 @@ hr {
   background-color: #f4f3ef;
   position: relative;
   z-index: 2;
-  float: right;
+  float: left;
   width: calc(100% - 260px);
   min-height: 100%; }
   .main-panel > .content {

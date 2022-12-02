@@ -3,13 +3,14 @@
 <%@ page import = "dao.*" %>
 <%@ page import = "java.net.*" %>
 <% 
-	Member loginMember = (Member)session.getAttribute("loginMember");
-	if(loginMember == null || loginMember.getMemberLevel() < 1) {
+	if(session.getAttribute("loginMember") == null) {
 		// 로그인 되지 않은 상태
 		String msg = URLEncoder.encode("잘못된 접근입니다", "utf-8");
-		response.sendRedirect(request.getContextPath()+"/loginForm.jsp");
+		response.sendRedirect(request.getContextPath()+"/loginForm.jsp?msg="+msg);
 		return;
 	}
+	Member loginMember = (Member)session.getAttribute("loginMember");
+
 	request.setCharacterEncoding("utf-8");
 
 	// 컨트롤러
@@ -24,7 +25,14 @@
 	
 	// 분리된 모델 호출
 	MemberDao memberDao = new MemberDao();
-	Member resultRow = memberDao.deleteMember(member);
-
+	int resultRow = memberDao.deleteMember(member);	
+	System.out.println(resultRow+"resultRow");
+	
+	if(resultRow == 0) {
+		String msg = URLEncoder.encode("패스워드를 다시 입력해주세요", "utf-8");
+		response.sendRedirect(request.getContextPath()+"/deleteMemberForm.jsp?msg="+msg);
+		return;
+	} else {
 	response.sendRedirect(request.getContextPath()+"/loginForm.jsp");
+	}
 %>

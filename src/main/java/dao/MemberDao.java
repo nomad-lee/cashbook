@@ -205,8 +205,7 @@ public class MemberDao {
 		}
 	}	
 	// 회원탈퇴
-	public Member deleteMember(Member member) throws Exception{
-		Member resultRow = new Member();
+	public int deleteMember(Member member) throws Exception{
 		
 		DBUtil dbUtil = new DBUtil();
 		Connection conn = dbUtil.getConnection();
@@ -216,13 +215,13 @@ public class MemberDao {
 		stmt.setString(2, member.getMemberPw());
 		
 		int row = stmt.executeUpdate();
-		if(row ==1) {
+		if(row == 1) {
 			System.out.println("삭제성공");
 		} else {
 			System.out.println("삭제실패");
 		}
 		stmt.close();
 		conn.close();
-		return resultRow;
+		return row;
 	}
 }

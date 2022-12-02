@@ -82,7 +82,6 @@
 		<%=loginMember.getMemberName()%>님 반갑습니다.
 		<a type="btn" class="btn btn-info" href="<%=request.getContextPath()%>/updateMemberForm.jsp">내정보</a>
 		<a type="btn" class="btn btn-danger" href="<%=request.getContextPath()%>/logout.jsp">로그아웃</a>
-		<a type="btn" class="btn btn-danger" href="<%=request.getContextPath()%>/deleteMemberForm.jsp">회원탈퇴</a>
 		<%
 			System.out.println(loginMember.getMemberLevel()+"레벨");
 			if(loginMember.getMemberLevel() > 0) {
