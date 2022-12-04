@@ -44,15 +44,9 @@
 
     	<div class="sidebar-wrapper">
             <div class="logo">
-                <span>
-                <a href="http://www.creative-tim.com" class="simple-text">내 정보</a>
-                </span>
-                asdf
-                <span>
-                <a href="http://www.creative-tim.com" class="simple-text">
+                <a href="table.jsp" class="simple-text">
                     가계부
                 </a>
-                </span>
             </div>
 
             <ul class="nav">
@@ -91,9 +85,9 @@
                         <i class="ti-bell"></i>
                         <p>Notifications</p>
                     </a>
-                </li>                
+                </li>
 				<li class="active-pro">
-                    <a href="upgrade.html">
+                    <a href="upgrade.jsp">
                         <i class="ti-export"></i>
                         <p>고객센터</p>
                     </a>
@@ -390,16 +384,7 @@
     	$(document).ready(function(){
 
         	demo.initChartist();
-
-        	$.notify({
-            	icon: 'ti-gift',
-            	message: "Welcome to <b>Paper Dashboard</b> - a beautiful Bootstrap freebie for your next project."
-
-            },{
-                type: 'success',
-                timer: 4000
-            });
-
+        	demo.showNotification('bottom','left');
     	});
 	</script>
 

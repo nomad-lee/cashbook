@@ -18,17 +18,17 @@
 	if(request.getParameter("memberId") == null	|| request.getParameter("memberPw") == null	|| request.getParameter("memberName") == null
 		|| request.getParameter("memberId") == "" || request.getParameter("memberPw") == ""	|| request.getParameter("memberName") == "") {
 		String msg = URLEncoder.encode("모든 정보를 입력하세요", "utf-8"); //미입력 방지, get방식 주소창에 문자열 인코딩
-		response.sendRedirect(request.getContextPath()+"/insertMemberForm.jsp?msg="+msg);
+		response.sendRedirect(request.getContextPath()+"/mainPage.jsp?msg="+msg);
 		return;
 	}
 	// 분리된 모델 호출
 	MemberDao memberDao = new MemberDao();
 	if(memberDao.selectMemberIdCk(memberId)) {
 		String msg = URLEncoder.encode("중복된 아이디입니다.", "utf-8");
-		response.sendRedirect(request.getContextPath()+"/insertMemberForm.jsp?msg="+msg);
+		response.sendRedirect(request.getContextPath()+"/mainPage.jsp?msg="+msg);
 		return;
 	}
 	Member resultRow = memberDao.insertMember(paramMember);
 	System.out.println(resultRow + " <-- insertMemberAction.jsp");
-	response.sendRedirect(request.getContextPath()+"/loginForm.jsp");
+	response.sendRedirect(request.getContextPath()+"/mainPage.jsp");
 %>

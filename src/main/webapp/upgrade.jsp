@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!Doctype html>
+<!doctype html>
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
@@ -23,10 +23,12 @@
     <!--  Paper Dashboard core CSS    -->
     <link href="assets/css/paper-dashboard.css" rel="stylesheet"/>
 
+
     <!--  CSS for Demo Purpose, don't include it in your project     -->
     <link href="assets/css/demo.css" rel="stylesheet" />
 
-    <!--     Fonts and icons     -->
+
+    <!--  Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
     <link href="assets/css/themify-icons.css" rel="stylesheet">
@@ -35,7 +37,7 @@
 <body>
 
 <div class="wrapper">
-	<div class="sidebar" data-background-color="black" data-active-color="warning">
+    <div class="sidebar" data-background-color="black" data-active-color="warning">
 
     <!--
 		Tip 1: you can change the color of the sidebar's background using: data-background-color="white | black"
@@ -80,13 +82,13 @@
                         <p>Icons</p>
                     </a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="notifications.jsp">
                         <i class="ti-bell"></i>
                         <p>Notifications</p>
                     </a>
                 </li>
-				<li class="active-pro">
+				<li class="active active-pro">
                     <a href="upgrade.jsp">
                         <i class="ti-export"></i>
                         <p>고객센터</p>
@@ -97,7 +99,7 @@
     </div>
 
     <div class="main-panel">
-		<nav class="navbar navbar-default">
+        <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle">
@@ -106,7 +108,7 @@
                         <span class="icon-bar bar2"></span>
                         <span class="icon-bar bar3"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Notifications</a>
+                    <a class="navbar-brand" href="#">Dashboard</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
@@ -143,88 +145,75 @@
             </div>
         </nav>
 
-
         <div class="content">
             <div class="container-fluid">
-                <div class="card">
-                    <div class="header">
-                        <h4 class="title">Notifications</h4>
-                        <p class="category">Handcrafted by our friend <a target="_blank" href="https://github.com/mouse0270">Robert McIntosh</a>. Please checkout the <a href="http://bootstrap-notify.remabledesigns.com/" target="_blank">full documentation.</a></p>
-
-                    </div>
-                    <div class="content">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h5>Notifications Style</h5>
-                                <div class="alert alert-info">
-                                    <span>This is a plain notification</span>
-                                </div>
-                                <div class="alert alert-info">
-                                    <button type="button" aria-hidden="true" class="close">×</button>
-                                    <span>This is a notification with close button.</span>
-                                </div>
-                                <div class="alert alert-info alert-with-icon" data-notify="container">
-                                    <button type="button" aria-hidden="true" class="close">×</button>
-                                    <span data-notify="icon" class="ti-bell"></span>
-                                    <span data-notify="message">This is a notification with close button and icon.</span>
-                                </div>
-                                <div class="alert alert-info alert-with-icon" data-notify="container">
-                                    <button type="button" aria-hidden="true" class="close">×</button>
-                                    <span data-notify="icon" class="ti-pie-chart"></span>
-                                    <span data-notify="message">This is a notification with close button and icon and have many lines. You can see that the icon and the close button are always vertically aligned. This is a beautiful notification. So you don't have to worry about the style.</span>
-                                </div>
+                <div class="row">
+					<div class="col-md-8 col-md-offset-2">
+                        <div class="card">
+                            <div class="header text-center">
+                                <h3 class="title">Paper Dashboard</h3>
+                                <p class="category">Are you looking for more components? Please check our Premium Version of Paper Dashboard Pro.</p>
+								<br>
                             </div>
-                            <div class="col-md-6">
-                                <h5>Notification states</h5>
-                                <div class="alert alert-info">
-                                    <button type="button" aria-hidden="true" class="close">×</button>
-                                    <span><b> Info - </b> This is a regular notification made with ".alert-info"</span>
-                                </div>
-                                <div class="alert alert-success">
-                                    <button type="button" aria-hidden="true" class="close">×</button>
-                                    <span><b> Success - </b> This is a regular notification made with ".alert-success"</span>
-                                </div>
-                                <div class="alert alert-warning">
-                                    <button type="button" aria-hidden="true" class="close">×</button>
-                                    <span><b> Warning - </b> This is a regular notification made with ".alert-warning"</span>
-                                </div>
-                                <div class="alert alert-danger">
-                                    <button type="button" aria-hidden="true" class="close">×</button>
-                                    <span><b> Danger - </b> This is a regular notification made with ".alert-danger"</span>
-                                </div>
-                            </div>
-                        </div>
-                        <br>
-                        <br>
-                        <div class="places-buttons">
-                            <div class="row">
-                                <div class="col-md-9">
-                                    <h5>Notifications Places
-                                        <p class="category">Click to view notifications</p>
-                                    </h5>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <button class="btn btn-default btn-block" onclick="demo.showNotification('top','left')">Top Left</button>
-                                </div>
-                                <div class="col-md-3">
-                                    <button class="btn btn-default btn-block" onclick="demo.showNotification('top','center')">Top Center</button>
-                                </div>
-                                <div class="col-md-3">
-                                    <button class="btn btn-default btn-block" onclick="demo.showNotification('top','right')">Top Right</button>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <button class="btn btn-default btn-block" onclick="demo.showNotification('bottom','left')">Bottom Left</button>
-                                </div>
-                                <div class="col-md-3">
-                                    <button class="btn btn-default btn-block" onclick="demo.showNotification('bottom','center')">Bottom Center</button>
-                                </div>
-                                <div class="col-md-3">
-                                    <button class="btn btn-default btn-block" onclick="demo.showNotification('bottom','right')">Bottom Right</button>
-                                </div>
+                            <div class="content table-responsive table-full-width table-upgrade">
+                                <table class="table">
+                                    <thead>
+                                        <th></th>
+                                    	<th class="text-center">Free</th>
+                                    	<th class="text-center">PRO</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                        	<td>Components</td>
+                                        	<td>16</td>
+                                        	<td>160</td>
+                                        </tr>
+                                        <tr>
+                                        	<td>Plugins</td>
+                                        	<td>4</td>
+                                        	<td>15</td>
+                                        </tr>
+                                        <tr>
+                                        	<td>Example Pages</td>
+                                        	<td>4</td>
+                                        	<td>25</td>
+                                        </tr>
+                                        <tr>
+                                        	<td>Documentation</td>
+                                        	<td><i class="fa fa-times text-danger"></i></td>
+                                        	<td><i class="fa fa-check text-success"></td>
+                                        </tr>
+                                        <tr>
+                                        	<td>SASS Files</td>
+											<td><i class="fa fa-check text-success"></i></td>
+                                        	<td><i class="fa fa-check text-success"></td>
+                                        </tr>
+                                        <tr>
+                                        	<td>Login/Register/Lock Pages</td>
+											<td><i class="fa fa-times text-danger"></i></td>
+                                        	<td><i class="fa fa-check text-success"></td>
+                                        </tr>
+										<tr>
+                                        	<td>Premium Support</td>
+											<td><i class="fa fa-times text-danger"></i></td>
+                                        	<td><i class="fa fa-check text-success"></td>
+                                        </tr>
+										<tr>
+                                        	<td></td>
+											<td>Free</td>
+                                        	<td>Just $39</td>
+                                        </tr>
+										<tr>
+											<td></td>
+											<td>
+												<a href="#" class="btn btn-round btn-fill btn-default disabled">Current Version</a>
+											</td>
+											<td>
+												<a target="_blank" href="http://www.creative-tim.com/product/paper-dashboard-pro/?ref=pdfree-upgrade-archive" class="btn btn-round btn-fill btn-info">Upgrade to PRO</a>
+											</td>
+										</tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -255,7 +244,7 @@
                         </li>
                     </ul>
                 </nav>
-				<div class="copyright pull-right">
+                <div class="copyright pull-right">
                     &copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by <a href="http://www.creative-tim.com">Creative Tim</a>
                 </div>
             </div>
@@ -288,5 +277,4 @@
 
 	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
 	<script src="assets/js/demo.js"></script>
-
 </html>

@@ -7,17 +7,17 @@
 	// 컨트롤러	
 	request.setCharacterEncoding("utf-8");
 
-	if(request.getParameter("memberId") == null
-	|| request.getParameter("memberPw") == null 
-	|| request.getParameter("memberId") == "" 
-	|| request.getParameter("memberPw") == "") {
+	if(request.getParameter("memberId_in") == null
+	|| request.getParameter("memberPw_in") == null 
+	|| request.getParameter("memberId_in") == "" 
+	|| request.getParameter("memberPw_in") == "") {
 	String msg = URLEncoder.encode("아이디와 패스워드를 입력해주세요", "utf-8");
-	response.sendRedirect(request.getContextPath()+"/loginForm.jsp");
+	response.sendRedirect(request.getContextPath()+"/mainPage.jsp?msg="+msg);
 	return;
 	}
 	
-	String memberId = request.getParameter("memberId");
-	String memberPw = request.getParameter("memberPw");
+	String memberId = request.getParameter("memberId_in");
+	String memberPw = request.getParameter("memberPw_in");
 	System.out.println(memberId+""+memberPw);
 	
 	Member paramMember = new Member();
@@ -28,7 +28,7 @@
 	MemberDao memberDao = new MemberDao();
 	Member resultMember = memberDao.login(paramMember);
 	
-	String redirectUrl = "/loginForm.jsp";
+	String redirectUrl = "/mainPage.jsp";
 	
 	if(resultMember != null) {
 		session.setAttribute("loginMember", resultMember); //session안에 로그인 아이디 & 이름을 저장

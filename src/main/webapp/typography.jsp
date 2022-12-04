@@ -44,7 +44,7 @@
 
 		<div class="sidebar-wrapper">
             <div class="logo">
-                <a href="http://www.creative-tim.com" class="simple-text">
+                <a href="table.jsp" class="simple-text">
                     가계부
                 </a>
             </div>
@@ -53,19 +53,19 @@
                 <li>
                     <a href="dashboard.jsp">
                         <i class="ti-panel"></i>
-                        <p>Dashboard</p>
+                        <p>종합 보고서</p>
                     </a>
                 </li>
                 <li>
                     <a href="user.jsp">
                         <i class="ti-user"></i>
-                        <p>User Profile</p>
+                        <p>최근 내역</p>
                     </a>
                 </li>
                 <li>
                     <a href="table.jsp">
                         <i class="ti-view-list-alt"></i>
-                        <p>Table List</p>
+                        <p>달력</p>
                     </a>
                 </li>
                 <li  class="active">
@@ -84,6 +84,12 @@
                     <a href="notifications.jsp">
                         <i class="ti-bell"></i>
                         <p>Notifications</p>
+                    </a>
+                </li>
+				<li class="active-pro">
+                    <a href="upgrade.jsp">
+                        <i class="ti-export"></i>
+                        <p>고객센터</p>
                     </a>
                 </li>
             </ul>
