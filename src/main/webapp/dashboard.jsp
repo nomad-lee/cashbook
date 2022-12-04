@@ -45,8 +45,9 @@
     	<div class="sidebar-wrapper">
             <div class="logo">
                 <a href="table.jsp" class="simple-text">
-                    가계부
+                    Cashplan
                 </a>
+               	<i class="ti-user">me</i>
             </div>
 
             <ul class="nav">

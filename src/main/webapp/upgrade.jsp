@@ -47,7 +47,7 @@
     	<div class="sidebar-wrapper">
             <div class="logo">
                 <a href="table.jsp" class="simple-text">
-                    가계부
+                    Cashplan
                 </a>
             </div>
 

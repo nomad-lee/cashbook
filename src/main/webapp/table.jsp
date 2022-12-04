@@ -11,8 +11,19 @@
 	<title>Paper Dashboard by Creative Tim</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- calendar fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
 
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
+    <!-- calendar icons -->
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/fonts/icomoon/style.css">
+    <!-- calendar packages -->
+    <link href='<%=request.getContextPath()%>/assets/fullcalendar/packages/core/main.css' rel='stylesheet' />
+    <link href='<%=request.getContextPath()%>/assets/fullcalendar/packages/daygrid/main.css' rel='stylesheet' />
+    
+    <!-- Style -->
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/calendarStyle.css">
 
     <!-- Bootstrap core CSS     -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
@@ -45,7 +56,7 @@
     	<div class="sidebar-wrapper">
             <div class="logo">
                 <a href="table.jsp" class="simple-text">
-                    가계부
+                    Cashplan
                 </a>
             </div>
 
@@ -142,147 +153,14 @@
                 </div>
             </div>
         </nav>
-
-
-        <div class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="header">
-                                <h4 class="title">Striped Table</h4>
-                                <p class="category">Here is a subtitle for this table</p>
-                            </div>
-                            <div class="content table-responsive table-full-width">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <th>ID</th>
-                                    	<th>Name</th>
-                                    	<th>Salary</th>
-                                    	<th>Country</th>
-                                    	<th>City</th>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                        	<td>1</td>
-                                        	<td>Dakota Rice</td>
-                                        	<td>$36,738</td>
-                                        	<td>Niger</td>
-                                        	<td>Oud-Turnhout</td>
-                                        </tr>
-                                        <tr>
-                                        	<td>2</td>
-                                        	<td>Minerva Hooper</td>
-                                        	<td>$23,789</td>
-                                        	<td>Curaçao</td>
-                                        	<td>Sinaai-Waas</td>
-                                        </tr>
-                                        <tr>
-                                        	<td>3</td>
-                                        	<td>Sage Rodriguez</td>
-                                        	<td>$56,142</td>
-                                        	<td>Netherlands</td>
-                                        	<td>Baileux</td>
-                                        </tr>
-                                        <tr>
-                                        	<td>4</td>
-                                        	<td>Philip Chaney</td>
-                                        	<td>$38,735</td>
-                                        	<td>Korea, South</td>
-                                        	<td>Overland Park</td>
-                                        </tr>
-                                        <tr>
-                                        	<td>5</td>
-                                        	<td>Doris Greene</td>
-                                        	<td>$63,542</td>
-                                        	<td>Malawi</td>
-                                        	<td>Feldkirchen in Kärnten</td>
-                                        </tr>
-                                        <tr>
-                                        	<td>6</td>
-                                        	<td>Mason Porter</td>
-                                        	<td>$78,615</td>
-                                        	<td>Chile</td>
-                                        	<td>Gloucester</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-md-12">
-                        <div class="card card-plain">
-                            <div class="header">
-                                <h4 class="title">Table on Plain Background</h4>
-                                <p class="category">Here is a subtitle for this table</p>
-                            </div>
-                            <div class="content table-responsive table-full-width">
-                                <table class="table table-hover">
-                                    <thead>
-                                        <th>ID</th>
-                                    	<th>Name</th>
-                                    	<th>Salary</th>
-                                    	<th>Country</th>
-                                    	<th>City</th>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                        	<td>1</td>
-                                        	<td>Dakota Rice</td>
-                                        	<td>$36,738</td>
-                                        	<td>Niger</td>
-                                        	<td>Oud-Turnhout</td>
-                                        </tr>
-                                        <tr>
-                                        	<td>2</td>
-                                        	<td>Minerva Hooper</td>
-                                        	<td>$23,789</td>
-                                        	<td>Curaçao</td>
-                                        	<td>Sinaai-Waas</td>
-                                        </tr>
-                                        <tr>
-                                        	<td>3</td>
-                                        	<td>Sage Rodriguez</td>
-                                        	<td>$56,142</td>
-                                        	<td>Netherlands</td>
-                                        	<td>Baileux</td>
-                                        </tr>
-                                        <tr>
-                                        	<td>4</td>
-                                        	<td>Philip Chaney</td>
-                                        	<td>$38,735</td>
-                                        	<td>Korea, South</td>
-                                        	<td>Overland Park</td>
-                                        </tr>
-                                        <tr>
-                                        	<td>5</td>
-                                        	<td>Doris Greene</td>
-                                        	<td>$63,542</td>
-                                        	<td>Malawi</td>
-                                        	<td>Feldkirchen in Kärnten</td>
-                                        </tr>
-                                        <tr>
-                                        	<td>6</td>
-                                        	<td>Mason Porter</td>
-                                        	<td>$78,615</td>
-                                        	<td>Chile</td>
-                                        	<td>Gloucester</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
+<!-- calendar part -->
+		<div class="content">
+        	<div id='calendar-container'>
+	    		<div id='calendar'></div>
             </div>
         </div>
 
+<!-- calendar part -->
         <footer class="footer">
             <div class="container-fluid">
                 <nav class="pull-left">
@@ -314,7 +192,99 @@
 
     </div>
 </div>
+<!-- calendar part -->
+<script src="<%=request.getContextPath()%>/assets/js/jquery-3.3.1.min.js"></script>
+<script src="<%=request.getContextPath()%>/assets/js/popper.min.js"></script>
+<script src="<%=request.getContextPath()%>/assets/js/bootstrap.min.js"></script>
 
+<script src='<%=request.getContextPath()%>/assets/fullcalendar/packages/core/main.js'></script>
+<script src='<%=request.getContextPath()%>/assets/fullcalendar/packages/interaction/main.js'></script>
+<script src='<%=request.getContextPath()%>/assets/fullcalendar/packages/daygrid/main.js'></script>
+<script src='<%=request.getContextPath()%>/assets/fullcalendar/packages/timegrid/main.js'></script>
+<script src='<%=request.getContextPath()%>/assets/fullcalendar/packages/list/main.js'></script>
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var calendarEl = document.getElementById('calendar');
+
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+	plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
+  	height: 'parent',
+  	header: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+  	},
+  	defaultView: 'dayGridMonth',
+	defaultDate: '2022-12-12',
+	navLinks: true, // can click day/week names to navigate views
+	editable: true,
+	eventLimit: true, // allow "more" link when too many events
+	events: [
+      {
+    	title: 'All Day Event',
+        start: '2022-12-01',
+      },
+      {
+        title: 'Long Event',
+        start: '2022-12-07',
+        end: '2022-12-10'
+      },
+      {
+        groupId: 999,
+        title: 'Repeating Event',
+        start: '2022-12-09T16:00:00'
+      },
+      {
+        groupId: 999,
+        title: 'Repeating Event',
+        start: '2022-12-16T16:00:00'
+      },
+      {
+        title: 'Conference',
+        start: '2022-12-11',
+        end: '2022-12-13'
+      },
+      {
+        title: 'Meeting',
+        start: '2022-12-12T10:30:00',
+        end: '2022-12-12T12:30:00'
+      },
+      {
+        title: 'Lunch',
+        start: '2022-12-12T12:00:00'
+      },
+      {
+        title: 'Meeting',
+        start: '2022-12-12T14:30:00'
+      },
+      {
+        title: 'Happy Hour',
+        start: '2022-12-12T17:30:00'
+      },
+      {
+        title: 'Dinner',
+        start: '2022-12-12T20:00:00'
+      },
+      {
+        title: 'Birthday Party',
+        start: '2022-12-13T07:00:00'
+      },
+      {
+        title: 'Click for Google',
+        url: 'http://google.com/',
+        start: '2022-12-28'
+      }
+    ]
+  });
+
+  calendar.render();
+});
+</script>
+<script src="<%=request.getContextPath()%>/assets/js/main.js"></script>
+<!-- calendar part -->
 
 </body>
 

@@ -234,7 +234,19 @@ hr {
     top: 0;
     left: 0;
     background-size: cover;
-    background-position: center center; }
+    background-position: center center; }    
+   .sidebar .logo .ti-user{
+    position: absolute;
+    font-size: 20px;
+    line-height: 30px;
+    right: 20px;
+   }    
+   .off-canvas-sidebar .logo .ti-user {
+    position: absolute;
+    font-size: 20px;
+    line-height: 30px;
+    right: 0;
+   }
 
 .sidebar,
 .off-canvas-sidebar {
@@ -253,7 +265,6 @@ hr {
       line-height: 20px; }
     .sidebar .logo .simple-text,
     .off-canvas-sidebar .logo .simple-text {
-      text-transform: uppercase;
       padding: 4px 0px;
       display: inline-block;
       font-size: 18px;
@@ -398,7 +409,7 @@ hr {
   min-height: 100%; }
   .main-panel > .content {
     padding: 30px 15px;
-    min-height: calc(100% - 123px); }
+    min-height: calc(100% - 83px); }
   .main-panel > .footer {
     border-top: 1px solid rgba(0, 0, 0, 0.1); }
   .main-panel .navbar {
