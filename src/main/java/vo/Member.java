@@ -6,10 +6,9 @@ public class Member {
 	private String memberPw;
 	private int memberLevel;
 	private String memberName;
+	private String memberMemo;
 	private String updatedate;
 	private String createdate;
-	
-	//읽고(getter) 수정(setter)하는 (멤버, 객체) 메서드
 	public int getMemberNo() {
 		return memberNo;
 	}
@@ -40,6 +39,12 @@ public class Member {
 	public void setMemberName(String memberName) {
 		this.memberName = memberName;
 	}
+	public String getMemberMemo() {
+		return memberMemo;
+	}
+	public void setMemberMemo(String memberMemo) {
+		this.memberMemo = memberMemo;
+	}
 	public String getUpdatedate() {
 		return updatedate;
 	}
@@ -51,5 +56,8 @@ public class Member {
 	}
 	public void setCreatedate(String createdate) {
 		this.createdate = createdate;
-	}	
+	}
+	
+	//읽고(getter) 수정(setter)하는 (멤버, 객체) 메서드
+	
 }

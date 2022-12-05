@@ -160,7 +160,7 @@ public class MemberDao {
 		
 		DBUtil dbUtil = new DBUtil();
 		Connection conn = dbUtil.getConnection();
-		String sql = "SELECT member_id memberId, member_level memberLevel, member_name memberName FROM member WHERE member_id = ? AND member_pw = PASSWORD(?)";
+		String sql = "SELECT member_id memberId, member_level memberLevel, member_name memberName, member_memo memberMemo FROM member WHERE member_id = ? AND member_pw = PASSWORD(?)";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, paramMember.getMemberId());
 		stmt.setString(2, paramMember.getMemberPw());
@@ -171,6 +171,7 @@ public class MemberDao {
 			resultMember.setMemberId(rs.getString("memberId"));
 			resultMember.setMemberLevel(rs.getInt("memberLevel"));
 			resultMember.setMemberName(rs.getString("memberName"));
+			resultMember.setMemberMemo(rs.getString("memberMemo"));
 		}
 		System.out.println(paramMember.getMemberId()+""+paramMember.getMemberPw()+"login값 넘어옴");
 		rs.close();
@@ -184,10 +185,11 @@ public class MemberDao {
 		
 		DBUtil dbUtil = new DBUtil();
 		Connection conn = dbUtil.getConnection();
-		String sql = "UPDATE member SET member_name = ?, updatedate = CURDATE() WHERE member_id = ?";
+		String sql = "UPDATE member SET member_name = ?, member_memo = ?, updatedate = CURDATE() WHERE member_id = ?";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, paramMember.getMemberName());
-		stmt.setString(2, paramMember.getMemberId());
+		stmt.setString(2, paramMember.getMemberMemo());
+		stmt.setString(3, paramMember.getMemberId());
 		
 		int row = stmt.executeUpdate();
 		if(row ==1) {
@@ -203,7 +205,35 @@ public class MemberDao {
 			conn.close();
 			return null;
 		}
-	}	
+	}
+	// 회원 비밀번호 수정
+		public Member updateMemberPw(Member paramMember) throws Exception {
+			Member loginMember = new Member();
+			
+			DBUtil dbUtil = new DBUtil();
+			Connection conn = dbUtil.getConnection();
+			String sql = "UPDATE member SET member_name = ?, member_memo = ?, updatedate = CURDATE(), member_pw = PASSWORD(?) WHERE member_id = ?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, paramMember.getMemberName());
+			stmt.setString(2, paramMember.getMemberMemo());
+			stmt.setString(3, paramMember.getMemberPw());
+			stmt.setString(4, paramMember.getMemberId());
+			
+			int row = stmt.executeUpdate();
+			if(row ==1) {
+				System.out.println("수정성공");
+				
+				stmt.close();
+				conn.close();
+				return loginMember;
+			} else {
+				System.out.println("수정실패");	
+				
+				stmt.close();
+				conn.close();
+				return null;
+			}
+		}
 	// 회원탈퇴
 	public int deleteMember(Member member) throws Exception{
 		
