@@ -10,7 +10,7 @@
 	}
 	int rowPerPage = 5;
 	int beginRow = (currentPage-1)*rowPerPage;
-	int cnt = 0;	// 전체 행 개수
+	int cnt = 0; // 전체 행 개수
 	
 	// 모델
 	NoticeDao noticeDao = new NoticeDao();

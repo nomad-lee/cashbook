@@ -1,5 +1,6 @@
 type = ['','info','success','warning','danger'];
 
+var user ="<%=user%>";
 
 demo = {
     initPickColor: function(){
@@ -132,10 +133,10 @@ demo = {
 
 	showNotification: function(from, align){
     	color = Math.floor((Math.random() * 4) + 1);
-
+		var user = "${user}";
     	$.notify({
         	icon: "ti-gift",
-        	message: "Welcome to <b>Paper Dashboard</b> - a beautiful freebie for every web developer."
+        	message: "<b>환영합니다!</b> -  현재, 오픈 이벤트로 한시적 무료로 운영중이니 많은 이용 바랍니다."
 
         },{
             type: type[color],

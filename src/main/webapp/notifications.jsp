@@ -44,9 +44,12 @@
 
     	<div class="sidebar-wrapper">
             <div class="logo">
-                <a href="table.jsp" class="simple-text">
+                <a href="" class="simple-text">
                     Cashplan
                 </a>
+                <a href="user.jsp">
+               		<i class="ti-user">me</i>
+               	</a>
             </div>
 
             <ul class="nav">
@@ -81,15 +84,15 @@
                     </a>
                 </li>
                 <li class="active">
-                    <a href="notifications.jsp">
+                    <a href="upgrade.jsp">
                         <i class="ti-bell"></i>
-                        <p>Notifications</p>
+                        <p>고객센터</p>
                     </a>
                 </li>
 				<li class="active-pro">
-                    <a href="upgrade.jsp">
+                    <a href="logout.jsp">
                         <i class="ti-export"></i>
-                        <p>고객센터</p>
+                        <p>로그아웃</p>
                     </a>
                 </li>
             </ul>

@@ -305,7 +305,7 @@ temporary rendered events).
 
 /* resizer (touch devices) */
 .fc-event .fc-resizer {
-  display: none;
+  display: inline;
 }
 
 .fc-event.fc-allow-mouse-resize .fc-resizer,

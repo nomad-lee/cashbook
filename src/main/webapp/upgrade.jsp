@@ -46,9 +46,12 @@
 
     	<div class="sidebar-wrapper">
             <div class="logo">
-                <a href="table.jsp" class="simple-text">
+                <a href="" class="simple-text">
                     Cashplan
                 </a>
+                <a href="user.jsp">
+               		<i class="ti-user">me</i>
+               	</a>
             </div>
 
             <ul class="nav">

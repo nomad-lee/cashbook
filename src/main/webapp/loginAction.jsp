@@ -32,7 +32,7 @@
 	
 	if(resultMember != null) {
 		session.setAttribute("loginMember", resultMember); //session안에 로그인 아이디 & 이름을 저장
-		redirectUrl = "/cash/cashList.jsp";
+		redirectUrl = "/dashboard.jsp";
 	}
 	
 	// redirect

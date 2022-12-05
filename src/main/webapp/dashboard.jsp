@@ -33,7 +33,6 @@
 
 </head>
 <body>
-
 <div class="wrapper">
     <div class="sidebar" data-background-color="black" data-active-color="warning">
 
@@ -44,10 +43,12 @@
 
     	<div class="sidebar-wrapper">
             <div class="logo">
-                <a href="table.jsp" class="simple-text">
+                <a href="" class="simple-text">
                     Cashplan
                 </a>
-               	<i class="ti-user">me</i>
+                <a href="user.jsp">
+               		<i class="ti-user">me</i>
+               	</a>
             </div>
 
             <ul class="nav">
@@ -84,13 +85,13 @@
                 <li>
                     <a href="notifications.jsp">
                         <i class="ti-bell"></i>
-                        <p>Notifications</p>
+                        <p>고객센터</p>
                     </a>
                 </li>
 				<li class="active-pro">
-                    <a href="upgrade.jsp">
+                    <a href="logout.jsp">
                         <i class="ti-export"></i>
-                        <p>고객센터</p>
+                        <p>로그아웃</p>
                     </a>
                 </li>
             </ul>
@@ -358,7 +359,10 @@
 
 
 </body>
-
+	
+	<script language=javascript>
+	var user = "넘어가니" ;
+	</script>
     <!--   Core JS Files   -->
     <script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
 	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
@@ -383,7 +387,6 @@
 
 	<script type="text/javascript">
     	$(document).ready(function(){
-
         	demo.initChartist();
         	demo.showNotification('bottom','left');
     	});
