@@ -17,6 +17,7 @@
 	String memberId = request.getParameter("memberId");
 	String memberName = request.getParameter("memberName");
 	String memberMemo = request.getParameter("memberMemo");
+	//memberMemo=memberMemo.replace("\r\n","<br>");
 	String memberPw = request.getParameter("memberPw");
 	String memberPw2 = request.getParameter("memberPw2");
 	

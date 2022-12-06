@@ -173,7 +173,7 @@
                                   	<%=loginMember.getMemberName()%><br/>
                                   </h4>
                                 </div>
-                                <p class="description text-center">
+                                <p class="description text-center" style="white-space: pre-line;">
                                 	<%=loginMember.getMemberMemo()%>
                                 </p>
                             </div>
