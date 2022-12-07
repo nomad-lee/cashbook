@@ -18,21 +18,21 @@
 
 
     <!-- Bootstrap core CSS     -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="<%=request.getContextPath()%>/assets/css/bootstrap.min.css" rel="stylesheet" />
 
     <!-- Animation library for notifications   -->
-    <link href="assets/css/animate.min.css" rel="stylesheet"/>
+    <link href="<%=request.getContextPath()%>/assets/css/animate.min.css" rel="stylesheet"/>
 
     <!--  Paper Dashboard core CSS    -->
-    <link href="assets/css/paper-dashboard.css" rel="stylesheet"/>
+    <link href="<%=request.getContextPath()%>/assets/css/paper-dashboard.css" rel="stylesheet"/>
 
     <!--  CSS for Demo Purpose, don't include it in your project     -->
-    <link href="assets/css/demo.css" rel="stylesheet" />
+    <link href="<%=request.getContextPath()%>/assets/css/demo.css" rel="stylesheet" />
 
     <!--  Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
-    <link href="assets/css/themify-icons.css" rel="stylesheet">
+    <link href="<%=request.getContextPath()%>/assets/css/themify-icons.css" rel="stylesheet">
 
 </head>
 <body>
@@ -58,31 +58,31 @@
                 <li class="active">
                     <a href="dashboard.jsp">
                         <i class="ti-panel"></i>
-                        <p>종합 보고서</p>
+                        <p>종합 현황</p>
                     </a>
                 </li>
                 <li>
-                    <a href="user.jsp">
-                        <i class="ti-user"></i>
-                        <p>최근 내역</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="table.jsp">
-                        <i class="ti-view-list-alt"></i>
-                        <p>달력</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="typography.jsp">
+                    <a href="<%=request.getContextPath()%>/admin/noticeList.jsp">
                         <i class="ti-text"></i>
-                        <p>Typography</p>
+                        <p>공지 관리</p>
                     </a>
                 </li>
                 <li>
-                    <a href="icons.jsp">
-                        <i class="ti-pencil-alt2"></i>
-                        <p>Icons</p>
+                    <a href="<%=request.getContextPath()%>/admin/categoryList.jsp">
+                        <i class="ti-view-list-alt"></i>
+                        <p>카테고리 관리</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="<%=request.getContextPath()%>/admin/memberList.jsp">
+                        <i class="ti-user"></i>
+                        <p>멤버관리</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="<%=request.getContextPath()%>/admin/helpListAll.jsp">
+                        <i class="ti-bell"></i>
+                        <p>고객센터 관리</p>
                     </a>
                 </li>
                 <li>
@@ -370,26 +370,26 @@
 </body>
 	
     <!--   Core JS Files   -->
-    <script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
-	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="<%=request.getContextPath()%>/assets/js/jquery-1.10.2.js" type="text/javascript"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/bootstrap.min.js" type="text/javascript"></script>
 
 	<!--  Checkbox, Radio & Switch Plugins -->
-	<script src="assets/js/bootstrap-checkbox-radio.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/bootstrap-checkbox-radio.js"></script>
 
 	<!--  Charts Plugin -->
-	<script src="assets/js/chartist.min.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/chartist.min.js"></script>
 
     <!--  Notifications Plugin    -->
-    <script src="assets/js/bootstrap-notify.js"></script>
+    <script src="<%=request.getContextPath()%>/assets/js/bootstrap-notify.js"></script>
 
     <!--  Google Maps Plugin    -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
 
     <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
-	<script src="assets/js/paper-dashboard.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/paper-dashboard.js"></script>
 
 	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-	<script src="assets/js/demo.js"></script>
+	<script src="<%=request.getContextPath()%>/assets/js/demo.js"></script>
 
 	<script type="text/javascript">
     	$(document).ready(function(){

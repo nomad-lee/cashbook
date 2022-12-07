@@ -1481,7 +1481,6 @@ textarea.form-control {
   background-color: #FFFFFF;
   color: #252422;
   margin-bottom: 20px;
-  position: relative;
   z-index: 1; }
   .card .image {
     width: 100%;
