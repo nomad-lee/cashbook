@@ -1,5 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import = "vo.*" %>
+<%
+	Member loginMember = (Member)session.getAttribute("loginMember");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +27,9 @@
       Templates are in the /templates folder (but you could also
       have templates inline in this html file if you'd like).
       -->
-    <ion-nav-view></ion-nav-view>
+    <ion-nav-view>
+    
+    </ion-nav-view>
     <script id="templates/UserMessages.html" type="text/ng-template">
       <ion-view id="userMessagesView"
           cache-view="false" 

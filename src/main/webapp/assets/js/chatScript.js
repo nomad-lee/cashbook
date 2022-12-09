@@ -227,7 +227,7 @@ angular.module('elastichat', ['ionic', 'monospaced.elastic', 'angularMoment'])
       return {
         userId: '534b8e5aaa5e7afc1b23e69b',
         date: new Date(),
-        text: '운영시간 중 답변드리겠습니다.'
+        text: '근무시간 중 답변드리겠습니다.'
       };
     }
 

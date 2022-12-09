@@ -146,6 +146,7 @@ demo = {
                 align: align
             }
         });
+        
 	},
     initDocumentationCharts: function(){
     //     	init single simple line chart

@@ -1,5 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import = "vo.*" %>
+<%@ page import = "java.net.*" %>
+<%
+	if(session.getAttribute("loginMember") == null) {
+		// 로그인 되지 않은 상태
+		String msg = URLEncoder.encode("잘못된 접근입니다", "utf-8");
+		response.sendRedirect(request.getContextPath()+"/mainPage.jsp?msg="+msg);
+		return;
+	}
+	Member loginMember = (Member)session.getAttribute("loginMember");
+	System.out.println(loginMember.getMemberLevel()+"Form레벨");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +19,7 @@
 	<link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Paper Dashboard by Creative Tim</title>
+	<title>Cashplan</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -83,18 +94,6 @@
                     </a>
                 </li>
                 <li>
-                    <a href="typography.jsp">
-                        <i class="ti-text"></i>
-                        <p>Typography</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="icons.jsp">
-                        <i class="ti-pencil-alt2"></i>
-                        <p>Icons</p>
-                    </a>
-                </li>
-                <li>
                     <a href="notifications.jsp">
                         <i class="ti-bell"></i>
                         <p>고객센터</p>
@@ -130,27 +129,18 @@
 								<p>Stats</p>
                             </a>
                         </li>
-                        <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="ti-bell"></i>
-                                    <p class="notification">5</p>
-									<p>Notifications</p>
-									<b class="caret"></b>
-                              </a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">Notification 1</a></li>
-                                <li><a href="#">Notification 2</a></li>
-                                <li><a href="#">Notification 3</a></li>
-                                <li><a href="#">Notification 4</a></li>
-                                <li><a href="#">Another notification</a></li>
-                              </ul>
-                        </li>
+                        <%
+                        	if(loginMember.getMemberLevel() == 1) {
+                        %>
 						<li>
-                            <a href="#">
+                            <a href="<%=request.getContextPath()%>/admin/adminMain.jsp">
 								<i class="ti-settings"></i>
-								<p>Settings</p>
+								<p>관리자 페이지</p>
                             </a>
                         </li>
+                        <%
+                        	}
+                        %>
                     </ul>
 
                 </div>

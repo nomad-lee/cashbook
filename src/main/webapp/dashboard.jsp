@@ -1,7 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "vo.*" %>
+<%@ page import = "dao.*" %>
+<%@ page import = "java.net.*" %>
+<%@ page import = "java.util.*" %>
 <%
+	if(session.getAttribute("loginMember") == null) {
+		// 로그인 되지 않은 상태
+		String msg = URLEncoder.encode("잘못된 접근입니다", "utf-8");
+		response.sendRedirect(request.getContextPath()+"/mainPage.jsp?msg="+msg);
+		return;
+	}
+	
+	//페이징
+	int currentPage = 1;
+	if(request.getParameter("currentPage") != null) {
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+	}
+	int rowPerPage = 5;
+	int beginRow = (currentPage-1)*rowPerPage;
+	int cnt = 0; // 전체 행 개수
+	
+	// 모델
 	Member loginMember = (Member)session.getAttribute("loginMember");
+	System.out.println(loginMember.getMemberLevel()+"Form레벨");
+	
+	// 공지part
+	NoticeDao noticeDao = new NoticeDao();
+	int lastPage = noticeDao.selectNoticeCount() / rowPerPage;
+	ArrayList<Notice> list = noticeDao.selectNoticeListByPage(beginRow, rowPerPage);
 %>
 <!Doctype html>
 <html lang="en">
@@ -11,7 +37,7 @@
 	<link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Paper Dashboard by Creative Tim</title>
+	<title>Cashplan</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -74,18 +100,6 @@
                     </a>
                 </li>
                 <li>
-                    <a href="typography.jsp">
-                        <i class="ti-text"></i>
-                        <p>Typography</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="icons.jsp">
-                        <i class="ti-pencil-alt2"></i>
-                        <p>Icons</p>
-                    </a>
-                </li>
-                <li>
                     <a href="notifications.jsp">
                         <i class="ti-bell"></i>
                         <p>고객센터</p>
@@ -121,21 +135,6 @@
 								<p>Stats</p>
                             </a>
                         </li>
-                        <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="ti-bell"></i>
-                                    <p class="notification">5</p>
-									<p>Notifications</p>
-									<b class="caret"></b>
-                              </a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">Notification 1</a></li>
-                                <li><a href="#">Notification 2</a></li>
-                                <li><a href="#">Notification 3</a></li>
-                                <li><a href="#">Notification 4</a></li>
-                                <li><a href="#">Another notification</a></li>
-                              </ul>
-                        </li>
                         <%
                         	if(loginMember.getMemberLevel() == 1) {
                         %>
@@ -155,9 +154,71 @@
         </nav>
 
 
+
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
+                    
+                	<div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+								<h1>공지사항</h1>
+                            </div>
+                            <div class="content">
+                            
+                            	<!-- 공지(5개)목록 페이징 -->
+								<div>
+									<table border="1" class="table">
+										<tr>
+											<th>공지번호</th>
+											<th>공지내용</th>
+											<th>날짜</th>
+										</tr>
+										<%
+											for(Notice n : list) {
+										%>
+												<tr>
+													<td><%=n.getNoticeNo()%></td>
+													<td><%=n.getNoticeMemo()%></td>
+													<td><%=n.getCreatedate()%></td>
+												</tr>
+										<%		
+											}
+										%>
+									</table>
+									<!-- 페이징코드 -->
+									<nav aria-label="pagiantion">
+							  			<ul class="pagination justify-content-center mt-3">		
+								  			<li class="page-item">
+												<a id=pnav1 class="page-link" href="<%=request.getContextPath()%>/dashboard.jsp?currentPage=1">처음으로</a>
+											</li>
+											<%
+												if(currentPage > 1) {
+											%>
+												<li class="page-item">
+													<a id=pnav2 class="page-link" href="<%=request.getContextPath()%>/dashboard.jsp?currentPage=<%=currentPage-1%>">이전</a>		
+												</li>
+											<%
+												}
+												if(currentPage < lastPage) {
+											%>
+												<li class="page-item">
+													<a id=pnav3 class="page-link" href="<%=request.getContextPath()%>/dashboard.jsp?currentPage=<%=currentPage+1%>">다음</a>		
+												</li>
+											<%
+												}
+											%>
+											<li class="page-item">
+												<a id=pnav4 class="page-link" href="<%=request.getContextPath()%>/dashboard.jsp?currentPage=<%=lastPage%>">마지막</a>
+											</li>
+										</ul>
+									</nav>
+								</div>
+                            
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="col-lg-3 col-sm-6">
                         <div class="card">
                             <div class="content">

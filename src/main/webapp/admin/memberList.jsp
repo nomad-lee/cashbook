@@ -113,12 +113,6 @@
                         <p>고객센터 관리</p>
                     </a>
                 </li>
-                <li>
-                    <a href="notifications.jsp">
-                        <i class="ti-bell"></i>
-                        <p>고객센터</p>
-                    </a>
-                </li>
 				<li class="active-pro">
                     <a href="logout.jsp">
                         <i class="ti-export"></i>
@@ -149,21 +143,6 @@
 								<p>Stats</p>
                             </a>
                         </li>
-                        <li class="dropdown">
-                              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="ti-bell"></i>
-                                    <p class="notification">5</p>
-									<p>Notifications</p>
-									<b class="caret"></b>
-                              </a>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">Notification 1</a></li>
-                                <li><a href="#">Notification 2</a></li>
-                                <li><a href="#">Notification 3</a></li>
-                                <li><a href="#">Notification 4</a></li>
-                                <li><a href="#">Another notification</a></li>
-                              </ul>
-                        </li>
                         <%
                         	if(loginMember.getMemberLevel() == 1) {
                         %>
@@ -189,13 +168,11 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">멤버 목록</h4>
-                                <p class="category">Created using <a href="https://www.google.com/fonts/specimen/Muli">Muli</a> Font Family</p>
+                                <h1>멤버목록</h1>
                             </div>
                             <div class="content">
                             	<div>
-									<!-- memberList contents... -->
-									<h1>멤버목록</h1>
+									<!-- memberList contents... -->									
 									<table class="table">
 										<tr>
 											<th>멤버번호</th>

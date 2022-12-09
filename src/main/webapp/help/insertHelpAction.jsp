@@ -19,10 +19,11 @@
 	Help help= new Help();
 	help.setHelpMemo(helpMemo);;
 	help.setMemberId(loginMember.getMemberId());
-	
+
+	System.out.println(helpMemo+"넘어온 질문 값");	
 	if(helpMemo == null || helpMemo == "") {
 		String msg = URLEncoder.encode("모든 정보를 입력하세요", "utf-8"); //미입력 방지, get방식 주소창에 문자열 인코딩
-		response.sendRedirect(request.getContextPath()+"/admin/insertHelpForm.jsp?msg="+msg);
+		response.sendRedirect(request.getContextPath()+"/admin/insertHelpForm.jsp?msg="+msg); //admin/insertHelpForm.jsp?msg="+msg
 		return;
 	}
 	// 분리된 모델 호출
@@ -30,11 +31,11 @@
 	int resultInsert = helpDao.insertHelp(help);
 	System.out.println(resultInsert+"공지추가 값");
 	if(resultInsert == 0) {
-		System.out.println("공지 추가 실패");
-		response.sendRedirect(request.getContextPath()+"/help/insertHelpForm.jsp");
+		System.out.println("질문 추가 실패");
+		response.sendRedirect(request.getContextPath()+"/help/insertHelpForm.jsp"); //help/insertHelpForm.jsp
 	} else {
-		System.out.println("공지 추가 완료");
-		response.sendRedirect(request.getContextPath()+"/help/helpList.jsp");
+		System.out.println("질문 추가 완료");
+		response.sendRedirect(request.getContextPath()+"/help/helpList.jsp"); //help/helpList.jsp
 	}
 	return;
 %>
