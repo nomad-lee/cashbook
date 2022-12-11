@@ -22,20 +22,14 @@
 	<title>Cashplan</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<!-- calendar fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
-
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
-    <!-- calendar icons -->
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/fonts/icomoon/style.css">
-    <!-- calendar packages -->
-    <link href='<%=request.getContextPath()%>/assets/fullcalendar/packages/core/main.css' rel='stylesheet' />
-    <link href='<%=request.getContextPath()%>/assets/fullcalendar/packages/daygrid/main.css' rel='stylesheet' />
+    <meta name="viewport" content="width=device-width" />
     
-    <!-- Style -->
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/calendarStyle.css">
-
+    <!-- Calendar -->
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css'>
+	<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+	<link rel="stylesheet" href="assets/css/calendarStyle.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+    
     <!-- Bootstrap core CSS     -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
 
@@ -148,11 +142,118 @@
         </nav>
 <!-- calendar part -->
 		<div class="content">
-        	<div id='calendar-container'>
-	    		<div id='calendar'></div>
+        	<div id='calendar-container'>        	
+        	
+				<!-- partial:index.partial.html -->
+				<div class="site-header autocomplete">
+					<div class="dialog">
+					</div>
+				</div>
+			
+				<div id='calendar'></div>
+			
+				<div id="calendar-popup">
+					<form id="event-form">
+						<div class='calander_popip_title'>
+							<i class="fa fa-calendar" aria-hidden="true"></i>
+							Add Event
+						</div>
+						<ul>
+							<li>
+								<label for="event-start"><i class="fa fa-bell-o" aria-hidden="true"></i>
+									From
+								</label>
+								<input id="event-start"  class='form-control' type="datetime-local" name="start"/>
+							</li>
+							<li>
+								<label for="event-end"><i class="fa fa-bell-slash" aria-hidden="true"></i>
+									To
+								</label>
+								<input id="event-end"  class='form-control' type="datetime-local" name="end"/>
+							</li>
+							<li>
+								<label for="event-title"><i class="fa fa-calendar-minus-o" aria-hidden="true"></i>
+									Event Name
+								</label>
+								<input id="event-title"  class='form-control' type="text" name="title"/>
+							</li>
+							<li>
+								<label for="event-location"><i class="fa fa-map-marker" aria-hidden="true"></i>
+									Location
+								</label>
+								<input id="event-location"   class='form-control' type="text" name="location"/>
+							</li>
+							<li>
+			 					<label for="event-details"><i class="fa fa-info-circle" aria-hidden="true"></i>
+									Description
+								</label>
+								<textarea id="event-details"  class='form-control' name="details"></textarea>
+							</li>
+							<div class="button">
+								<input type="submit"  class='form-control submit_btn'/>
+							</div>
+						</ul>
+					</form>
+			  
+					<div id="event">
+					<header></header>
+						<ul>
+							<li class="start-time"> 
+								<p>Start at</p>
+								<time></time>
+							</li>
+							<li class="end-time">
+								<p>End</p>
+								<time></time>
+							</li>
+							<li>
+								<p><i class="fa fa-map-marker" aria-hidden="true"></i>Location</p>
+								<p class="location"></p>
+							</li>
+							<li>
+								<p><i class="fa fa-info" aria-hidden="true"></i>Details:</p>
+								<p class="details"></p>
+							</li>
+						</ul>
+					</div>
+			
+					<div class="prong">
+						<div class="bottom-prong-dk"></div>
+						<div class="bottom-prong-lt"></div>
+					</div>
+				</div>
+			
+				<div class='modle' id='simplemodal'>
+					<div class='modle-continer'>
+						<form id="edit-form">
+							<div class='modal-header'>
+								<span class='close-btn' id='close-btnid'>&times</span>
+								<h2>Edit Event</h2>
+							</div>
+							
+							<div class='modal-body'>  
+								<lable for='eventname'>Event Name</lable>
+								<input type='text' name='eventname' id='eventname' class='form-control'>
+								<lable for='location'>Location</lable>
+								<input type='text' name='location' id='location' class='form-control'>     
+								<label for="event-start">From</label>
+								<input id="eventstart" type="datetime-local" name="start" class='form-control'/>     
+								<label for="event-end">To</label>
+								<input id="eventend" type="datetime-local" name="end" class='form-control'/>
+								<label for="event-details">Details</label>
+								<textarea id="eventdetails" type='text' name="details"  class='form-control'></textarea>    
+							</div>
+							
+							<div class='modal-footer'>
+								<button type='submit' class='btn btn-info'>save</button>
+								<button class='btn btn-dafault'>cancel</button>      
+							</div>
+						</form>
+					</div>  
+				</div>            
+            
             </div>
         </div>
-
 <!-- calendar part -->
         <footer class="footer">
             <div class="container-fluid">
@@ -182,107 +283,18 @@
             </div>
         </footer>
 
-
     </div>
 </div>
-<!-- calendar part -->
-<script src="<%=request.getContextPath()%>/assets/js/jquery-3.3.1.min.js"></script>
-<script src="<%=request.getContextPath()%>/assets/js/popper.min.js"></script>
-<script src="<%=request.getContextPath()%>/assets/js/bootstrap.min.js"></script>
-
-<script src='<%=request.getContextPath()%>/assets/fullcalendar/packages/core/main.js'></script>
-<script src='<%=request.getContextPath()%>/assets/fullcalendar/packages/interaction/main.js'></script>
-<script src='<%=request.getContextPath()%>/assets/fullcalendar/packages/daygrid/main.js'></script>
-<script src='<%=request.getContextPath()%>/assets/fullcalendar/packages/timegrid/main.js'></script>
-<script src='<%=request.getContextPath()%>/assets/fullcalendar/packages/list/main.js'></script>
-
-
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  var calendarEl = document.getElementById('calendar');
-
-  var calendar = new FullCalendar.Calendar(calendarEl, {
-	plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
-  	height: 'parent',
-  	header: {
-      left: 'prev,next today',
-      center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
-  	},
-  	defaultView: 'dayGridMonth',
-	defaultDate: '2022-12-12',
-	navLinks: true, // can click day/week names to navigate views
-	editable: true,
-	eventLimit: true, // allow "more" link when too many events
-	events: [
-      {
-    	title: 'All Day Event',
-        start: '2022-12-01',
-      },
-      {
-        title: 'Long Event',
-        start: '2022-12-07',
-        end: '2022-12-10'
-      },
-      {
-        groupId: 999,
-        title: 'Repeating Event',
-        start: '2022-12-09T16:00:00'
-      },
-      {
-        groupId: 999,
-        title: 'Repeating Event',
-        start: '2022-12-16T16:00:00'
-      },
-      {
-        title: 'Conference',
-        start: '2022-12-11',
-        end: '2022-12-13'
-      },
-      {
-        title: 'Meeting',
-        start: '2022-12-12T10:30:00',
-        end: '2022-12-12T12:30:00'
-      },
-      {
-        title: 'Lunch',
-        start: '2022-12-12T12:00:00'
-      },
-      {
-        title: 'Meeting',
-        start: '2022-12-12T14:30:00'
-      },
-      {
-        title: 'Happy Hour',
-        start: '2022-12-12T17:30:00'
-      },
-      {
-        title: 'Dinner',
-        start: '2022-12-12T20:00:00'
-      },
-      {
-        title: 'Birthday Party',
-        start: '2022-12-13T07:00:00'
-      },
-      {
-        title: 'Click for Google',
-        url: 'http://google.com/',
-        start: '2022-12-28'
-      }
-    ]
-  });
-
-  calendar.render();
-});
-</script>
-<script src="<%=request.getContextPath()%>/assets/js/main.js"></script>
-<!-- calendar part -->
 
 </body>
+	<!-- Calendar -->
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/moment.min.js'></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/fullcalendar.min.js'></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js'></script>
+	<script  src="assets/js/calendarScript.js"></script>
 
     <!--   Core JS Files   -->
-    <script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
 	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
 
 	<!--  Checkbox, Radio & Switch Plugins -->
@@ -302,6 +314,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
 	<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
 	<script src="assets/js/demo.js"></script>
-
-
 </html>
