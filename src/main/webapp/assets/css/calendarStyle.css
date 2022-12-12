@@ -72,7 +72,7 @@
 }
 #calendar{
     /* margin: -54px 5px; */
-    position: absolute;
+    position: relative;
 
 }
 .search-field:placeholder-shown {
@@ -139,7 +139,10 @@
 	margin-bottom:10px;
 	color: black;  
 }
-
+.fc-scroller, .fc-day-grid-container {
+	overflow: hidden !important;
+	height: 100% !important;
+}
 #calendar-popup header {
     text-align: center;
     font-size: 1.5em;

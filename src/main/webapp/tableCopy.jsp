@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "vo.*" %>
-<%@ page import = "dao.*" %>
-<%@ page import = "java.util.*" %>
 <%@ page import = "java.net.*" %>
 <%
 	if(session.getAttribute("loginMember") == null) {
@@ -12,15 +10,6 @@
 	}
 	Member loginMember = (Member)session.getAttribute("loginMember");
 	System.out.println(loginMember.getMemberLevel()+"Form레벨");
-	
-
-	CategoryDao categoryDao = new CategoryDao();
-	ArrayList<Category> categoryList = categoryDao.selectCategoryList();
-	
-	int year = 2022;
-	int month = 11;
-	CashDao cashDao = new CashDao();
-	ArrayList<HashMap<String, Object>> list = cashDao.selectCashListByMonth(loginMember.getMemberId(), year, month+1);
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -172,40 +161,36 @@
 						<ul>
 							<li>
 								<label for="event-start"><i class="fa fa-bell-o" aria-hidden="true"></i>
-									cashDate
+									From
 								</label>
-								<input id="event-start"  class='form-control' type="datetime-local" name="cashDate"/>
+								<input id="event-start"  class='form-control' type="datetime-local" name="start"/>
 							</li>
 							<li>
-								<label for="event-title"><i class="fa fa-bell-slash" aria-hidden="true"></i>
-									categoryNo
-								</label>								
-								<select id="event-title" class='form-control' name = "categoryNo">
-									<%	
-										for(Category c : categoryList) {
-									%>
-											<option value="<%=c.getCategoryNo()%>">
-												[<%=c.getCategoryKind()%>] <%=c.getCategoryName() %>
-											</option>
-									<%
-										}
-									%>
-								</select>
+								<label for="event-end"><i class="fa fa-bell-slash" aria-hidden="true"></i>
+									To
+								</label>
+								<input id="event-end"  class='form-control' type="datetime-local" name="end"/>
 							</li>
 							<li>
-								<label for="event-location"><i class="fa fa-calendar-minus-o" aria-hidden="true"></i>
-									cashPrice
+								<label for="event-title"><i class="fa fa-calendar-minus-o" aria-hidden="true"></i>
+									Event Name
 								</label>
-								<input id="event-location"  class='form-control' type="number" name="cashPrice"/>
+								<input id="event-title"  class='form-control' type="text" name="title"/>
+							</li>
+							<li>
+								<label for="event-location"><i class="fa fa-map-marker" aria-hidden="true"></i>
+									Location
+								</label>
+								<input id="event-location"   class='form-control' type="text" name="location"/>
 							</li>
 							<li>
 			 					<label for="event-details"><i class="fa fa-info-circle" aria-hidden="true"></i>
-									cashMemo
+									Description
 								</label>
-								<textarea rows="3" id="event-details"  class='form-control' name="cashMemo"></textarea>
+								<textarea id="event-details"  class='form-control' name="details"></textarea>
 							</li>
 							<div class="button">
-								<input type="submit" class='form-control submit_btn'/>
+								<input type="submit"  class='form-control submit_btn'/>
 							</div>
 						</ul>
 					</form>
