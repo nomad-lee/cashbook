@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "vo.*" %>
+<%@ page import = "dao.*" %>
 <%@ page import = "java.net.*" %>
+<%@ page import = "java.util.*" %>
 <%
 	if(session.getAttribute("loginMember") == null) {
 		// 로그인 되지 않은 상태
@@ -8,8 +10,29 @@
 		response.sendRedirect(request.getContextPath()+"/mainPage.jsp?msg="+msg);
 		return;
 	}
+	// 월별 검색 년도 계산
+	int year = 0;
+	if(request.getParameter("year") == null) {
+		Calendar c = Calendar.getInstance();
+		year = c.get(Calendar.YEAR);
+	} else {
+		year = Integer.parseInt(request.getParameter("year"));
+	}
+	
 	Member loginMember = (Member)session.getAttribute("loginMember");
+	String memberId = loginMember.getMemberId();
 	System.out.println(loginMember.getMemberLevel()+"Form레벨");
+	
+	CashDao cashDao = new CashDao();
+	CashDao cashDao2 = new CashDao();
+	ArrayList<HashMap<String, Object>> list = cashDao.cashListByYear(memberId);
+	ArrayList<HashMap<String, Object>> list2 = cashDao2.cashListByMonth(memberId, year);
+	System.out.println(loginMember.getMemberId()+"로그인된 아이디"+list);
+	
+	// 페이징 사용할 최소년도와 최대년도
+	HashMap<String, Object> map = cashDao.selectMaxMinYear();
+	int minYear = (Integer)(map.get("minYear"));
+	int maxYear = (Integer)(map.get("maxYear"));
 %>
 <!Doctype html>
 <html lang="en">
@@ -108,7 +131,7 @@
                         <span class="icon-bar bar2"></span>
                         <span class="icon-bar bar3"></span>
                     </button>
-                    <a class="navbar-brand" href="#">User Profile</a>
+                    <a class="navbar-brand" href="#">Recent List</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
@@ -139,109 +162,81 @@
 
         <div class="content">
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-4 col-md-5">
-                        <div class="card card-user">
-                            <div class="image">
-                                <img src="assets/img/background.jpg" alt="..."/>
-                            </div>
-                            <div class="content">
-                                <div class="author">
-                                  <img class="avatar border-white" src="assets/img/faces/face-2.jpg" alt="..."/>
-                                  <h4 class="title">
-                                  	<%=loginMember.getMemberName()%><br/>
-                                  </h4>
-                                </div>
-                                <p class="description text-center" style="white-space: pre-line;">
-                                	<%=loginMember.getMemberMemo()%>
-                                </p>
-                            </div>
-                            <hr>
-                            <div class="text-center">
-                                <div class="row">
-                                    <div class="col-md-3 col-md-offset-1">
-                                        <h5>12<br /><small>Files</small></h5>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <h5>2GB<br /><small>Used</small></h5>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <h5>24,6$<br /><small>Spent</small></h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>      
-                    	<div class="text-center">
-                        	<a type="button" class="btn btn-danger btn-fill btn-wd" href="<%=request.getContextPath()%>/deleteMemberForm.jsp">회원탈퇴</a>                    		
-                    	</div>                 
-                    </div>
-                    
-                    
-                    <div class="col-lg-8 col-md-7">
-                        <div class="card">
-                            <div class="header">
-                                <h4 class="title">Edit Profile</h4>
-                            </div>
-                            <div class="content">
-                                <form action="<%=request.getContextPath()%>/updateMemberAction.jsp" method="post">
-                                    <div class="row">
-                                        <div class="col-md-7">
-                                            <div class="form-group">
-                                                <label>아이디</label>
-                                                <input type="text" class="form-control border-input" placeholder="memberId" name="memberId" value="<%=loginMember.getMemberId()%>" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-5">
-                                            <div class="form-group">
-                                                <label>별명</label>
-                                                <input type="text" class="form-control border-input" name="memberName" value="<%=loginMember.getMemberName()%>">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>비밀번호</label>
-                                                <input type="password" class="form-control border-input" name="memberPw" placeholder="변경 시 입력" value="">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label>비밀번호 확인</label>
-                                                <input type="password" class="form-control border-input" name="memberPw2" placeholder="변경 시 입력" value="">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>상태 메세지</label>
-                                                <textarea rows="5" class="form-control border-input" name="memberMemo"><%=loginMember.getMemberMemo()%></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                   	<!-- msg parameter값이 있으면 출력 -->
-									<%
-										String msg = request.getParameter("msg");
-										if(msg != null) {
-									%>
-											<div class="text-red text-center" id="msg"><%=msg%></div> <!-- 제목을 입력하시오, 내용을 입력하시오 -->
-									<%
-										}
-									%>
-                                    <div class="text-center">
-                                        <button type="submit" class="btn btn-info btn-fill btn-wd">Update Profile</button>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
+                
+				<!-- 년도별 수입/지출 -->
+				<h4> 년도별 수입/지출 </h4>
+				<table border="1" class="table">
+					<tr>
+						<th>년도</th>
+						<th>수입카운트</th>
+						<th>수입합계</th>
+						<th>수입평균</th>
+						<th>지출카운트</th>
+						<th>지출합계</th>
+						<th>지출평균</th>
+					</tr>			
+						<%
+							for(HashMap<String, Object> m : list) {
+								System.out.println(m.get("year")+"년도");
+						%>
+							<tr>					
+								<td><%=m.get("year")%></td>
+								<td><%=m.get("countIncome")%></td>
+								<td><%=m.get("sumIncome")%>원</td>
+								<td><%=m.get("avgIncome")%>원</td>
+								<td><%=m.get("countExport")%></td>
+								<td><%=m.get("sumExport")%>원</td>
+								<td><%=m.get("avgExport")%>원</td>
+							</tr>
+						<%
+							}				
+						%>
+				</table>
+				<!-- 년도별 수입/지출 -->
+				
+				<!-- 월별 수입/지출 -->
+				<h4><%=year%>년 월별 수입/지출 </h4>
+				<table border="1" class="table">
+					<tr>
+						<th>월</th>
+						<th>수입카운트</th>
+						<th>수입합계</th>
+						<th>수입평균</th>
+						<th>지출카운트</th>
+						<th>지출합계</th>
+						<th>지출평균</th>
+					</tr>			
+						<%
+							for(HashMap<String, Object> m : list2) {
+								System.out.println(m.get("year")+"년도2");
+						%>
+							<tr>					
+								<td><%=m.get("month")%></td>
+								<td><%=m.get("countIncome")%></td>
+								<td><%=m.get("sumIncome")%>원</td>
+								<td><%=m.get("avgIncome")%>원</td>
+								<td><%=m.get("countExport")%></td>
+								<td><%=m.get("sumExport")%>원</td>
+								<td><%=m.get("avgExport")%>원</td>
+							</tr>
+						<%
+							}				
+						%>
+				</table>
+				<%
+					if(year > minYear) {
+				%>
+						<a href="<%=request.getContextPath()%>/recentList.jsp?&year=<%=year-1%>">이전</a>
+				<%		
+					}
+				
+					if(year < maxYear) {
+				%>
+						<a href="<%=request.getContextPath()%>/recentList.jsp?&year=<%=year+1%>">다음</a>	
+				<%		
+					}
+				%>
+				<!-- 월별 수입/지출 -->
             </div>
         </div>
 
@@ -253,7 +248,7 @@
 
                         <li>
                             <a href="http://www.creative-tim.com">
-                                Creative Tim
+                                Our Team
                             </a>
                         </li>
                         <li>
@@ -269,7 +264,7 @@
                     </ul>
                 </nav>
 				<div class="copyright pull-right">
-                    &copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by <a href="http://www.creative-tim.com">Creative Tim</a>
+                    &copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> <a href="http://www.creative-tim.com">Goodee Academy</a>
                 </div>
             </div>
         </footer>

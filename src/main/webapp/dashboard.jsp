@@ -88,7 +88,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="user.jsp">
+                    <a href="recentList.jsp">
                         <i class="ti-user"></i>
                         <p>최근 내역</p>
                     </a>
