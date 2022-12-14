@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <title>가계부</title>
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css'><link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mainPageStyle.css">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css'>
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/assets/css/mainPageStyle.css">
 
 </head>
 <body>
@@ -51,7 +52,7 @@
             <input type="text" name="memberPw" id="memberPw" />
           </div>
 
-          <button class="btn-sign btn-up">회원가입 완료</button>
+          <button class="btn-sign btn-up" id="signinBtn">회원가입 완료</button>
         </form>
           <!-- msg parameter값이 있으면 출력 -->
 	 	  <%
@@ -104,6 +105,22 @@
 </main>
 <!-- partial -->
   <script src="<%=request.getContextPath()%>/assets/js/mainPageScript.js"></script>
+  <script>
+	let signinBtn = document.querySelector('#signinBtn');
+
+	signinBtn.addEventListener('click', function(){
+		// 디버깅
+		console.log('siginBtn clik!');
+		
+		// ID 폼 유효성 검사
+		let memberId = document.querySelector('#memberId');
+		if(memberId.value == '') {
+			alert('id를 입력하세요');
+			memberId.focus(); // 브라우저의 커스를 id태그로 이동
+			return;
+		}
+	});
+  </script>
 
 </body>
 </html>

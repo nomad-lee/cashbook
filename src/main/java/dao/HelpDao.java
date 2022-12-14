@@ -46,8 +46,9 @@ public class HelpDao {
 	// 사용자 질문조회
 	public ArrayList<HashMap<String, Object>> selectHelpList(String memberId) throws Exception {
 		ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String,Object>>();
-		String sql = "SELECT h.help_no helpNo, h.help_memo helpMemo, h.createdate helpCreatedate, c.comment_memo commentMemo, c.createdate commentCreatedate"
-					+" FROM help h LEFT JOIN comment c ON h.help_no = c.help_no WHERE h.member_id = ?";
+		String sql = "SELECT h.member_id helpMemberId, h.help_no helpNo, h.help_memo helpMemo, DATE_FORMAT(h.createdate, \"%m/%d %H:%i\") helpCreatedate"
+						+", c.member_id commentMemberId, c.comment_memo commentMemo, DATE_FORMAT(c.createdate, \"%m/%d %H:%i\") commentCreatedate"
+						+" FROM help h LEFT JOIN comment c ON h.help_no = c.help_no WHERE h.member_id = ?";
 		
 		DBUtil dbUtil = new DBUtil();
 		Connection conn = null;
@@ -61,9 +62,11 @@ public class HelpDao {
 		
 		while(rs.next()) {
 			HashMap<String, Object> m = new HashMap<String, Object>();
+			m.put("helpMemberId", rs.getString("helpMemberId"));
 			m.put("helpNo", rs.getInt("helpNo"));
 			m.put("helpMemo", rs.getString("helpMemo"));
 			m.put("helpCreatedate", rs.getString("helpCreatedate"));
+			m.put("commentMemberId", rs.getString("commentMemberId"));
 			m.put("commentMemo", rs.getString("commentMemo"));
 			m.put("commentCreatedate", rs.getString("commentCreatedate"));
 			list.add(m);
@@ -77,10 +80,11 @@ public class HelpDao {
 		
 		DBUtil dbUtil = new DBUtil();
 		Connection conn = dbUtil.getConnection();
-		String sql = "INSERT help(help_memo, member_id, updatedate, createdate) VALUES(?, ?, NOW(), NOW())";
+		String sql = "INSERT help(help_memo, member_id, updatedate, createdate) VALUES(?, ?, NOW(), ?)";
 		PreparedStatement stmt = conn.prepareStatement(sql);
 		stmt.setString(1, help.getHelpMemo());
 		stmt.setString(2, help.getMemberId());
+		stmt.setString(3, help.getCreatedate());
 		
 		int row = stmt.executeUpdate();
 		if(row ==1) {

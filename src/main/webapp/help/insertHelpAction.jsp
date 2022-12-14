@@ -15,9 +15,11 @@
 	request.setCharacterEncoding("utf-8");
 	
 	String helpMemo = request.getParameter("helpMemo");
+	String createdate = request.getParameter("createdate");
 	
 	Help help= new Help();
-	help.setHelpMemo(helpMemo);;
+	help.setHelpMemo(helpMemo);
+	help.setCreatedate(createdate);
 	help.setMemberId(loginMember.getMemberId());
 
 	System.out.println(helpMemo+"넘어온 질문 값");	

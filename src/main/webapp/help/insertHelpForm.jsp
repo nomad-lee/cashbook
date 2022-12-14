@@ -13,7 +13,7 @@
 	}	
 
 	LocalDateTime currentDate = LocalDateTime.now();  
-	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd HH:mm");
 	String formatted = currentDate.format(formatter);
 	
 %>

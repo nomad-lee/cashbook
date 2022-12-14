@@ -3,6 +3,8 @@
 <%@ page import = "dao.*" %>
 <%@ page import = "java.net.*" %>
 <%@ page import = "java.util.*" %>
+<%@ page import = "java.time.*" %>
+<%@ page import = "java.time.format.*" %>
 <%
 	if(session.getAttribute("loginMember") == null) {
 		// 로그인 되지 않은 상태
@@ -16,7 +18,12 @@
 
 	String memberId = loginMember.getMemberId();
 	HelpDao helpDao = new HelpDao();
-	ArrayList<HashMap<String, Object>> list = helpDao.selectHelpList(memberId);	
+	ArrayList<HashMap<String, Object>> list = helpDao.selectHelpList(memberId);
+	
+	// 오늘 날짜 포맷
+	LocalDateTime currentDate = LocalDateTime.now();  
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd HH:mm");
+	String formatted = currentDate.format(formatter);
 %>
 <!Doctype html>
 <html lang="en">
@@ -144,7 +151,8 @@
 
                 </div>
             </div>
-        </nav>
+        </nav>        
+        
 		<!-- chat -->
         <div class="content">
 			<section class="msger">
@@ -155,35 +163,52 @@
 				</header>
 				
 				<main class="msger-chat"> <!-- helpList -->
-					<div class="msg left-msg">
-						<div class="msg-img" style="background-image: url(https://image.flaticon.com/icons/svg/327/327779.svg)"></div>
-						
-						<div class="msg-bubble">
-							<div class="msg-info">
-								<div class="msg-info-name">관리자</div>
-								<div class="msg-info-time">12:45</div>
-							</div>
-							
-							<div class="msg-text">
-							Hi, welcome to SimpleChat! Go ahead and send me a message. 😄
-							</div>
-						</div>
-					</div>
-							
+					<table>
+			        </table>
+			        <%
+						for(HashMap<String, Object> m : list) {
+							if(m.get("helpMemberId") == null || m.get("helpMemo") == null){
+								return;
+							} else {
+					%>							
 					<div class="msg right-msg">
 						<div class="msg-img" style="background-image: url(https://image.flaticon.com/icons/svg/145/145867.svg)"></div>
 							
 						<div class="msg-bubble">
 							<div class="msg-info">
-								<div class="msg-info-name">Sajad</div>
-								<div class="msg-info-time">12:46</div>
+								<div class="msg-info-name"><%=m.get("helpMemberId")%></div>
+								<div class="msg-info-time"><%=m.get("helpCreatedate")%></div>
 							</div>
 							
 							<div class="msg-text">
-								You can change your name in JS section!
+								<%=m.get("helpMemo")%>
 							</div>
 						</div>
 					</div>
+					<%
+							}
+							if(m.get("commentMemberId") == null || m.get("commentMemo") == null){
+								return;
+							} else {
+					%>
+					<div class="msg left-msg">
+						<div class="msg-img" style="background-image: url(https://image.flaticon.com/icons/svg/327/327779.svg)"></div>
+						
+						<div class="msg-bubble">
+							<div class="msg-info">
+								<div class="msg-info-name"><%=m.get("commentMemberId")%></div>
+								<div class="msg-info-time"><%=m.get("commentCreatedate")%></div>
+							</div>
+							
+							<div class="msg-text">
+								<%=m.get("commentMemo")%>
+							</div> 
+						</div>
+					</div>			
+					<%
+							}
+						}
+					%>
 				</main>
 				
 				<form class="msger-inputarea"> <!-- insertHelpAction -->

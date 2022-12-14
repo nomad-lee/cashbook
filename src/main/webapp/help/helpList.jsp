@@ -3,6 +3,8 @@
 <%@ page import = "dao.*" %>
 <%@ page import = "java.net.*" %>
 <%@ page import = "java.util.*" %>
+<%@ page import = "java.time.*" %>
+<%@ page import = "java.time.format.*" %>
 <%
 	Member loginMember = (Member)session.getAttribute("loginMember");
 	if(loginMember == null) {
@@ -14,7 +16,9 @@
 	
 	String memberId = loginMember.getMemberId();
 	HelpDao helpDao = new HelpDao();
-	ArrayList<HashMap<String, Object>> list = helpDao.selectHelpList(memberId);	
+	ArrayList<HashMap<String, Object>> list = helpDao.selectHelpList(memberId);
+	
+
 %>
 <!DOCTYPE html>
 <html>
@@ -38,6 +42,9 @@
 		</tr>
 		<%
 			for(HashMap<String, Object> m : list) {
+				String currentDate = (String)(m.get("helpCreatedate"));  
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd HH:mm");
+				String formatted = currentDate.format(formatter);
 		%>
 				<tr>
 					<td><%=m.get("helpMemo")%></td>
