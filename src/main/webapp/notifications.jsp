@@ -15,7 +15,7 @@
 	Member loginMember = (Member)session.getAttribute("loginMember");
 	System.out.println(loginMember.getMemberLevel()+"Form레벨");
 	
-
+	int helpNo = 0;
 	String memberId = loginMember.getMemberId();
 	HelpDao helpDao = new HelpDao();
 	ArrayList<HashMap<String, Object>> list = helpDao.selectHelpList(memberId);
@@ -168,50 +168,57 @@
 			        <%
 						for(HashMap<String, Object> m : list) {
 							if(m.get("helpMemberId") == null || m.get("helpMemo") == null){
-								return;
-							} else {
-					%>							
-					<div class="msg right-msg">
-						<div class="msg-img" style="background-image: url(https://image.flaticon.com/icons/svg/145/145867.svg)"></div>
-							
-						<div class="msg-bubble">
-							<div class="msg-info">
-								<div class="msg-info-name"><%=m.get("helpMemberId")%></div>
-								<div class="msg-info-time"><%=m.get("helpCreatedate")%></div>
-							</div>
-							
-							<div class="msg-text">
-								<%=m.get("helpMemo")%>
-							</div>
-						</div>
-					</div>
-					<%
-							}
-							if(m.get("commentMemberId") == null || m.get("commentMemo") == null){
-								return;
-							} else {
+								continue;
+							} else { // helpNo 같으면 패스 m.get helpNO i=0; i++ i>1 continue
+								
+								if(helpNo == (int)m.get("helpNo")){
+									
+								} else {
 					%>
-					<div class="msg left-msg">
-						<div class="msg-img" style="background-image: url(https://image.flaticon.com/icons/svg/327/327779.svg)"></div>
-						
-						<div class="msg-bubble">
-							<div class="msg-info">
-								<div class="msg-info-name"><%=m.get("commentMemberId")%></div>
-								<div class="msg-info-time"><%=m.get("commentCreatedate")%></div>
-							</div>
-							
-							<div class="msg-text">
-								<%=m.get("commentMemo")%>
-							</div> 
-						</div>
-					</div>			
+									<div class="msg right-msg">
+										<div class="msg-img" style="background-image: url(https://image.flaticon.com/icons/svg/145/145867.svg)"></div>
+											
+										<div class="msg-bubble">
+											<div class="msg-info">
+												<div class="msg-info-name"><%=m.get("helpMemberId")%></div>
+												<div class="msg-info-time"><%=m.get("helpCreatedate")%></div>
+											</div>
+											
+											<div class="msg-text">
+												<%=m.get("helpMemo")%>
+											</div>
+										</div>
+									</div>
 					<%
+								}
+								helpNo = (int)m.get("helpNo");
+								
+								if(m.get("commentMemberId") == null || m.get("commentMemo") == null){
+									continue;
+								} else {
+					%>
+									<div class="msg left-msg">
+										<div class="msg-img" style="background-image: url(https://image.flaticon.com/icons/svg/327/327779.svg)"></div>
+										
+										<div class="msg-bubble">
+											<div class="msg-info">
+												<div class="msg-info-name"><%=m.get("commentMemberId")%></div>
+												<div class="msg-info-time"><%=m.get("commentCreatedate")%></div>
+											</div>
+											
+											<div class="msg-text">
+												<%=m.get("commentMemo")%>
+											</div> 
+										</div>
+									</div>			
+					<%
+								}
 							}
 						}
 					%>
 				</main>
 				
-				<form class="msger-inputarea"> <!-- insertHelpAction -->
+				<form class="msger-inputarea"  action="<%=request.getContextPath()%>/help/insertHelpAction.jsp" method="post"> <!-- insertHelpAction -->
 					<input type="text" class="msger-input" placeholder="Enter your message...">
 					<button type="submit" class="msger-send-btn">Send</button>
 				</form>
