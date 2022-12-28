@@ -38,7 +38,7 @@
 		response.sendRedirect(request.getContextPath()+"/user.jsp?msg="+msg+"&memberId="+memberId);
 		return;
 	} else if((memberPw == null || "".equals(memberPw)) && (memberPw2 == null || "".equals(memberPw2))) {
-		// 비밀번호 변경 시
+		// 비밀번호 미변경
 		updateMember = memberDao.updateMember(loginMember);		
 		System.out.println("비번 미변경");
 	} else if((memberPw != null && memberPw2 == null) || (memberPw == null && memberPw2 != null) || !memberPw.equals(memberPw2)){
@@ -46,7 +46,7 @@
 		response.sendRedirect(request.getContextPath()+"/user.jsp?msg="+msg);
 		return;
 	} else {
-		// 비밀번호 미 변경
+		// 비밀번호 변경 시
 		updateMember = memberDao.updateMemberPw(loginMember);
 		System.out.println("비번 변경");
 	}	

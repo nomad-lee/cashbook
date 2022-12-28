@@ -246,16 +246,14 @@
 								<h2>Edit Event</h2>
 							</div>
 							
-							<div class='modal-body'>  
-								<lable for='eventname'>Event Name</lable>
-								<input type='text' name='eventname' id='eventname' class='form-control'>
-								<lable for='location'>Location</lable>
-								<input type='text' name='location' id='location' class='form-control'>     
-								<label for="event-start">From</label>
+							<div class='modal-body'>
+								<label for="event-start">cashDate</label>
 								<input id="eventstart" type="datetime-local" name="start" class='form-control'/>     
-								<label for="event-end">To</label>
-								<input id="eventend" type="datetime-local" name="end" class='form-control'/>
-								<label for="event-details">Details</label>
+								<lable for='eventname'>categoryNo</lable>
+								<input type='text' name='eventname' id='eventname' class='form-control'>
+								<lable for='location'>cashPrice</lable>
+								<input type='text' name='location' id='location' class='form-control'>     
+								<label for="event-details">cashMemo</label>
 								<textarea id="eventdetails" type='text' name="details"  class='form-control'></textarea>    
 							</div>
 							
